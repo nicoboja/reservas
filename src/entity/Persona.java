@@ -32,11 +32,11 @@ public class Persona {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getPass() {
+		return pass;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	public boolean isInhabilitado() {
 		return inhabilitado;
@@ -50,7 +50,7 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private String usuario;
-	private String contraseña;
+	private String pass;
 	private boolean inhabilitado;
 	
 
