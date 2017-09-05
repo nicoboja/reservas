@@ -15,11 +15,11 @@ public class Principal {
 		do {
 			
 			System.out.println("\n\n...............###############···········\n");
-			System.out.println("MENU PRINCIPAÑ:");
+			System.out.println("MENU PRINCIPAL:");
 			System.out.println("1 - ABMC PERSONAS");
 			System.out.println("2 - ABMC Vehiculos");
 			System.out.println("3 - ABMC Tipos Vehiculos");
-			System.out.println("0 - Salir");
+			System.out.println("0 - Salir\n");
 			rta=s.nextLine();
 			
 			switch (rta.toLowerCase()) {
