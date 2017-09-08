@@ -1,6 +1,6 @@
 package entity;
 
-public class Vehiculo {
+public class Elemento {
 	
 	public int getIdV() {
 		return idV;
