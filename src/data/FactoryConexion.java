@@ -5,11 +5,12 @@ import java.sql.*;
 public class FactoryConexion {
 	
 	private String driver="com.mysql.jdbc.Driver";
-	private String host="localhost";
+	private String host="127.0.0.1";
+	private String hostWin="localhost";
 	private String port="3306";
 	private String user="java";
 	private String password="java";
-	private String db="java2017";
+	private String db="reserva";
 	
 	private static FactoryConexion instancia;
 		
@@ -39,7 +40,9 @@ public class FactoryConexion {
 			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
 			}
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 		}
 		cantConn++;
 		return conn;
