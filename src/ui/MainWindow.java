@@ -1,20 +1,20 @@
-
 package ui;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JDesktopPane;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JDesktopPane;
+import java.awt.BorderLayout;
 
-public class MainWindows {
+public class MainWindow {
 
 	private JFrame frame;
+	private JDesktopPane desktopPane;
 
 	/**
 	 * Launch the application.
@@ -23,7 +23,7 @@ public class MainWindows {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindows window = new MainWindows();
+					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class MainWindows {
 	/**
 	 * Create the application.
 	 */
-	public MainWindows() {
+	public MainWindow() {
 		initialize();
 	}
 
@@ -44,32 +44,37 @@ public class MainWindows {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 678, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBackground(new Color(65, 105, 170));
-		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnPersona = new JMenu("Personas");
-		menuBar.add(mnPersona);
+		JMenu mnuPersona = new JMenu("Persona");
+		menuBar.add(mnuPersona);
 		
-		JMenuItem mntmGestionar = new JMenuItem("Gestionar Personas");
-		mnPersona.add(mntmGestionar);
+		JMenuItem mnuGestionarPersonas = new JMenuItem("Gestionar Personas");
+		mnuGestionarPersonas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mnuABMCPersonaClick();
+			}
+		});
+		mnuPersona.add(mnuGestionarPersonas);
 		
 		JMenu mnElementos = new JMenu("Elementos");
 		menuBar.add(mnElementos);
 		
 		JMenuItem mntmGestionarElementos = new JMenuItem("Gestionar Elementos");
 		mnElementos.add(mntmGestionarElementos);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JMenu mnReservas = new JMenu("Reservas");
-		menuBar.add(mnReservas);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Gestionar Reservas");
-		mnReservas.add(mntmNewMenuItem);
+		desktopPane = new JDesktopPane();
+		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
+	}
+
+	protected void mnuABMCPersonaClick() {
+		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
 	}
 }

@@ -7,8 +7,10 @@ public class Principal {
 	
 	private static Scanner s;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		
+		
 		s=new Scanner(System.in);
 		String rta="";
 		boolean continua=true;
@@ -22,11 +24,12 @@ public class Principal {
 			System.out.println("0 - Salir\n");
 			rta=s.nextLine();
 			
-			switch (rta.toLowerCase()) {
+			switch (rta) {
 			case "1":
 				
 				System.out.println("(1)");
-				
+				ABMCPersonaConsole test = new ABMCPersonaConsole();
+				test.start();
 				break;
 		
 			case "0":
