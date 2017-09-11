@@ -24,32 +24,51 @@ public class ABMCElementoTest {
 			System.out.println("B - Baja Elemento");
 			System.out.println("M - Modificar Elemento");
 			System.out.println("C - Buscar Elemento");
+			System.out.println("L - Listar Elementos");
 			System.out.println("S - Salir");
 			rta=s.nextLine();
 		
 			switch (rta) {
+			
 				case "a":
 				try {
 					this.alta();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 					break;
+					
 				case "b":
-					//this.baja();
+				try {
+					this.baja();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 					break;
+					
 				case "m":
 					//this.modificacion();
 					break;
-				case "c":
-				try {
-					this.mostrar(ctrl.getAll());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					break;
+					
+				case "c":	
+					try{
+					Elemento el=new Elemento();
+					System.out.println("Ingrese Nombre:");
+					el.setNombre(s.nextLine());
+					this.mostrar(ctrl.getByNombre(el));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+						break;
+					
+				case "l":
+					try {
+						this.mostrar(ctrl.getAll());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+						break;
+						
 				case "s":
 					cont=false;
 			}			
@@ -60,7 +79,7 @@ public class ABMCElementoTest {
 	}
 		
 	private void alta() throws Exception{
-		System.out.println("\n\n Nuevo Elemento ");
+		System.out.println("\n\n Agregar un Elemento ");
 		System.out.println("--------------");
 		Elemento e=new Elemento();
 		System.out.println("Ingrese Nombre");
@@ -68,6 +87,30 @@ public class ABMCElementoTest {
 		System.out.println("Ingrese Descripcion");
 		e.setDescrip(s.nextLine());
 		ctrl.add(e);
+	}
+	
+	private void baja() throws Exception{
+		String res;
+		System.out.println("\n\n Borrar un Elemento ");
+		System.out.println("--------------");
+		Elemento el=new Elemento();
+		try{
+			System.out.println("Ingrese Nombre");
+			el.setNombre(s.nextLine());
+			if(ctrl.getByNombre(el)==null){
+				System.out.println("El elemento no exite");
+			} else{
+				System.out.println("desea borrarlo? s/n");
+				res=(s.nextLine());
+				if (res=="s") {
+					ctrl.delete(el);
+				}
+			};
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		
 	}
 	
 	public void mostrar(ArrayList<Elemento>elementos){
@@ -78,8 +121,14 @@ public class ABMCElementoTest {
 	
 	public void mostrar(Elemento e){
 		String h="";
+		
+		if(e.getNombre()==null){
+			System.out.println("El elemento no exite");
+		} else{
+
 		System.out.println(e.getIdE()+" - "+e.getNombre()+", "+
 						 e.getDescrip()+": "+h);
+		}
 	}
 	
 
