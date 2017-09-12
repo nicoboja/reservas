@@ -32,7 +32,7 @@ public class DataPersona {
 					p.setHabilitado(rs.getBoolean("habilitado"));
 					
 					p.getCategoria().setId(rs.getInt("idC"));
-					p.getCategoria().setDescripcion(rs.getString("descripcion"));
+					p.getCategoria().setDescripcion(rs.getString("nivel"));
 					
 					pers.add(p);
 				}
@@ -64,19 +64,19 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select p.id, nombre, apellido, dni, habilitado, categoriaId, descripcion from persona p inner join categoria c on p.categoriaId=c.id where dni=?");
+					"select p.idP, nombre, apellido, dni, habilitado, p.idC, nivel from persona p inner join categoria c on p.idC=c.idC where dni=?");
 			stmt.setString(1, per.getDni());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
 					p=new Persona();
 					p.setCategoria(new Categoria());
-					p.setId(rs.getInt("id"));
+					p.setId(rs.getInt("idP"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
-					p.getCategoria().setId(rs.getInt("categoriaId"));
-					p.getCategoria().setDescripcion(rs.getString("descripcion"));
+					p.getCategoria().setId(rs.getInt("idC"));
+					p.getCategoria().setDescripcion(rs.getString("nivel"));
 			}
 			
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ public class DataPersona {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn()
 					.prepareStatement(
-					"insert into persona(dni, nombre, apellido, habilitado, categoriaId) values (?,?,?,?,?)",
+					"insert into persona(dni, nombre, apellido, habilitado, idC) values (?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS
 					);
 			stmt.setString(1, p.getDni());

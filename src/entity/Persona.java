@@ -1,7 +1,7 @@
 package entity;
 
 public class Persona {
-	private int idP;
+	private int id;
 	private String nombre;
 	private String apellido;
 	private String dni;
@@ -17,11 +17,11 @@ public class Persona {
 	}
 	
 	public int getId(){
-		return idP;
+		return id;
 	}
 	
 	public void setId(int id){
-		this.idP=id;
+		this.id=id;
 	}
 	
 	public String getNombre() {
