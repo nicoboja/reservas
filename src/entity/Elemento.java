@@ -5,7 +5,14 @@ public class Elemento {
 	private int idE;
 	private String nombre;
 	private String descrip;
+	private TipoElemento tipoE;
 	
+	public TipoElemento getTipoElem() {
+		return tipoE;
+	}
+	public void setTipoElem(TipoElemento idT) {
+		this.tipoE = idT;
+	}
 	public int getIdE() {
 		return idE;
 	}

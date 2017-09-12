@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controlers.CtrlABMElemento;
+import controlers.CtrlABMTipoElemento;
 import entity.Elemento;
+import entity.TipoElemento;
 
 
 public class ABMCElementoTest {
@@ -79,18 +81,26 @@ public class ABMCElementoTest {
 	}
 		
 	private void alta() throws Exception{
+		CtrlABMTipoElemento ctrlTE=new CtrlABMTipoElemento();
 		System.out.println("\n\n Agregar un Elemento ");
 		System.out.println("--------------");
 		Elemento e=new Elemento();
+		TipoElemento te=new TipoElemento();
 		System.out.println("Ingrese Nombre");
 		e.setNombre(s.nextLine());
 		System.out.println("Ingrese Descripcion");
 		e.setDescrip(s.nextLine());
+		System.out.println("Ingrese Tipo Elemento");
+		te.setNombre(s.nextLine());
+		ctrlTE.getByNombre(te);
+		System.out.println(te.getIdT());
+		e.setTipoElem(te);
 		ctrl.add(e);
 	}
 	
+	
 	private void baja() throws Exception{
-		String res;
+		
 		System.out.println("\n\n Borrar un Elemento ");
 		System.out.println("--------------");
 		Elemento el=new Elemento();
@@ -100,12 +110,10 @@ public class ABMCElementoTest {
 			if(ctrl.getByNombre(el)==null){
 				System.out.println("El elemento no exite");
 			} else{
-				System.out.println("desea borrarlo? s/n");
-				res=(s.nextLine());
-				if (res=="s") {
-					ctrl.delete(el);
-				}
-			};
+				System.out.println("Borrando elemento!");
+				ctrl.delete(el);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

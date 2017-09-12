@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import data.DataElemento;
 import entity.Elemento;
+import entity.TipoElemento;
 
 public class CtrlABMElemento {
 	
-	//private ArrayList<Elemento> elm;
 	private DataElemento dataElem=new DataElemento();
 	
 	public void add(Elemento e) throws Exception{

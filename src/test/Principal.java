@@ -38,6 +38,12 @@ public class Principal {
 				test.start();
 						
 				break;
+				
+			case "3":
+				
+				ABMCTipoElementoTest testTe=new ABMCTipoElementoTest();
+				System.out.println("(3)");
+				testTe.start();
 		
 			case "0":
 				continua=false;
