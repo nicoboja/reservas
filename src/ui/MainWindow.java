@@ -65,6 +65,11 @@ public class MainWindow {
 		menuBar.add(mnElementos);
 		
 		JMenuItem mntmGestionarElementos = new JMenuItem("Gestionar Elementos");
+		mntmGestionarElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mnuABMCElementoClick();
+			}
+		});
 		mnElementos.add(mntmGestionarElementos);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -74,6 +79,11 @@ public class MainWindow {
 
 	protected void mnuABMCPersonaClick() {
 		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
+	}
+	protected void mnuABMCElementoClick() {
+		ABMCElementoDesktop pd= new ABMCElementoDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}

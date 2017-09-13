@@ -93,6 +93,43 @@ public class DataPersona {
 		return p;
 	}
 	
+	public void remove(Persona p) throws Exception {
+		PreparedStatement stmt=null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"delete from persona where idP=?");
+			stmt.setInt(1, p.getId());
+			stmt.execute();		
+			System.out.println("Se borro la Persona con ID= "+p.getId()+" Nombre: "+p.getNombre());
+		}catch (Exception e1) {
+			System.out.println("Ha fallado el borrado de datos");
+			throw e1;
+		}finally{
+			FactoryConexion.getInstancia().releaseConn();
+		}		
+	}
+	
+	public void update(Persona p) throws Exception {
+		PreparedStatement stmt=null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update persona set dni=?,nombre=?, apellido=?,habilitado=?, idC=? where idP=?;");
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, p.getNombre());
+			stmt.setString(3, p.getApellido());
+			stmt.setBoolean(4, p.isHabilitado());
+			stmt.setInt(5, p.getCategoria().getId());
+			stmt.setInt(6, p.getId());
+			stmt.execute();		
+			System.out.println("Se Modifico la Persona con ID= "+p.getId()+" Nombre: "+p.getNombre());
+		}catch (Exception e1) {
+			System.out.println("Ha fallado el borrado de datos");
+			throw e1;
+		}finally{
+			FactoryConexion.getInstancia().releaseConn();
+		}		
+	}
+	
 	public void add(Persona p) throws Exception{
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
@@ -108,6 +145,7 @@ public class DataPersona {
 			stmt.setBoolean(4, p.isHabilitado());
 			stmt.setInt(5, p.getCategoria().getId());
 			stmt.executeUpdate();
+			//??
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				p.setId(keyResultSet.getInt(1));

@@ -28,7 +28,7 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ABMCPersonaDesktop extends JInternalFrame {
+public class ABMCElementoDesktop extends JInternalFrame {
 
 	private CtrlABMPersona ctrl=new CtrlABMPersona();
 	
@@ -50,7 +50,7 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ABMCPersonaDesktop frame = new ABMCPersonaDesktop();
+					ABMCElementoDesktop frame = new ABMCElementoDesktop();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ABMCPersonaDesktop() {
+	public ABMCElementoDesktop() {
 		setClosable(true);
 		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 377, 350);
@@ -235,13 +235,10 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 		Persona p = this.mapearDeForm();
 		try{
 			ctrl.add(p);
-			JOptionPane.showMessageDialog(null, "Se agrego a "+p.getNombre()+" correctamente!");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 		this.txtId.setText(String.valueOf(p.getId()));
-		
-
 		
 	}
 	
