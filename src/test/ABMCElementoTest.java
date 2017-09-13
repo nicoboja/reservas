@@ -92,9 +92,7 @@ public class ABMCElementoTest {
 		e.setDescrip(s.nextLine());
 		System.out.println("Ingrese Tipo Elemento");
 		te.setNombre(s.nextLine());
-		ctrlTE.getByNombre(te);
-		System.out.println(te.getIdT());
-		e.setTipoElem(te);
+		e.setTipoElem(ctrlTE.getByNombre(te));
 		ctrl.add(e);
 	}
 	

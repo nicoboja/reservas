@@ -24,8 +24,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
+
+
 public class ABMCElementoDesktop extends JInternalFrame {
-	//private AutoBinding<Persona, TipoElemento, JComboBox, Object> cbo;
+	
 	
 	private CtrlABMElemento ctrl=new CtrlABMElemento();
 	private Elemento currentElem=new Elemento();
@@ -166,7 +168,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 			this.cboTipo.setModel(new DefaultComboBoxModel(this.ctrl.getTipos().toArray()));
 			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Error recuperando Categorias");
+			JOptionPane.showMessageDialog(this, "Error recuperando Tipos");
 		}		
 	}
 

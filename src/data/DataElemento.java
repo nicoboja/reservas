@@ -12,11 +12,11 @@ public class DataElemento {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into elemento (idT, nombre, descripcion) values (?,?,?)");
+					"insert into elemento (idTipo, nombre, descripcion) values (?,?,?)");
 			stmt.setInt(1, e.getTipoElem().getIdT());
 			stmt.setString(2, e.getNombre());
 			stmt.setString(3, e.getDescrip());
-			stmt.executeQuery();
+			stmt.executeUpdate();
 		}catch (Exception e1){
 			System.out.println("No se ha cargado un elemento");
 			throw e1;
