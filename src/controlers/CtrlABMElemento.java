@@ -5,12 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import data.DataElemento;
+import data.DataTipoElemento;
 import entity.Elemento;
 import entity.TipoElemento;
 
 public class CtrlABMElemento {
 	
 	private DataElemento dataElem=new DataElemento();
+	private DataTipoElemento dataTipo=new DataTipoElemento();
 	
 	public void add(Elemento e) throws Exception{
 		dataElem.add(e);
@@ -26,6 +28,10 @@ public class CtrlABMElemento {
 	
 	public void delete(Elemento e) throws Exception{
 		dataElem.delete(e);
+	}
+	
+	public ArrayList<TipoElemento> getTipos() throws Exception{
+		return dataTipo.getAll();
 	}
 	
 }

@@ -16,23 +16,22 @@ public class DataElemento {
 			stmt.setInt(1, e.getTipoElem().getIdT());
 			stmt.setString(2, e.getNombre());
 			stmt.setString(3, e.getDescrip());
-			stmt.execute();
+			stmt.executeQuery();
 		}catch (Exception e1){
 			System.out.println("No se ha cargado un elemento");
 			throw e1;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
-		}	
-		
+		}			
 	}
 	
 	public void delete(Elemento e) throws Exception {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"delete from elemento where nombre=?");
-			stmt.setString(1, e.getNombre());
-			stmt.execute();			
+					"delete from elemento where idE=?");
+			stmt.setInt(1, e.getIdE());
+			stmt.executeQuery();			
 		}catch (Exception e1) {
 			System.out.println("Ha fallado el borrado de datos");
 			throw e1;
@@ -101,10 +100,7 @@ public class DataElemento {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
-		
-		return elementos;
-		
-	}
-	
+		}		
+		return elementos;		
+	}	
 }

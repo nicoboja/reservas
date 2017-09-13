@@ -10,8 +10,8 @@ public class Elemento {
 	public TipoElemento getTipoElem() {
 		return tipoE;
 	}
-	public void setTipoElem(TipoElemento idT) {
-		this.tipoE = idT;
+	public void setTipoElem(TipoElemento tipoE) {
+		this.tipoE = tipoE;
 	}
 	public int getIdE() {
 		return idE;

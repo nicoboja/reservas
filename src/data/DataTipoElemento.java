@@ -18,7 +18,7 @@ public class DataTipoElemento {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from tipo_elemento where nombre=?");
+					"select * from tipoelemento where nombre=?");
 			stmt.setString(1, te.getNombre());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
@@ -47,7 +47,7 @@ public class DataTipoElemento {
 		try {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
-			rs = stmt.executeQuery("select * from tipo_elemento");
+			rs = stmt.executeQuery("select * from tipoelemento");
 			if(rs!=null){
 				while(rs.next()){
 					TipoElemento tipoElem=new TipoElemento();
