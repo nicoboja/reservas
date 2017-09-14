@@ -25,6 +25,9 @@ public class MainWindow {
 				try {
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
+					Login login = new Login();
+					login.setVisible(true);
+					login.setAlwaysOnTop(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -71,6 +74,12 @@ public class MainWindow {
 			}
 		});
 		mnElementos.add(mntmGestionarElementos);
+		
+		JMenu mnReservacs = new JMenu("Reservas");
+		menuBar.add(mnReservacs);
+		
+		JMenuItem mntmGestionarReservas = new JMenuItem("Gestionar Reservas");
+		mnReservacs.add(mntmGestionarReservas);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();

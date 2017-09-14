@@ -248,6 +248,7 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 	protected void borrarClick(){
 		try{
 			ctrl.delete(this.mapearDeForm());
+			JOptionPane.showMessageDialog(null, "Se Elimino Correctamente!");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
@@ -256,6 +257,7 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 	protected void modificarClick(){
 		try{
 			ctrl.update(this.mapearDeForm());
+			JOptionPane.showMessageDialog(null, "Se Modifico la Persona Correctamente!");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
