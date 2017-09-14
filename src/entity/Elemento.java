@@ -2,34 +2,36 @@ package entity;
 
 public class Elemento {
 	
-	public int getIdV() {
-		return idV;
+
+	private int id;
+	private String nombre;
+	private String descrip;
+	private TipoElemento tipo;
+	
+	public TipoElemento getTipoElem() {
+		return tipo;
 	}
-	public void setIdV(int idV) {
-		this.idV = idV;
+	public void setTipoElem(TipoElemento tipo) {
+		this.tipo = tipo;
 	}
-	public String getMarca() {
-		return marca;
+	public int getId() {
+		return id;
 	}
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getModelo() {
-		return modelo;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getDominio() {
-		return dominio;
+	public String getDescrip() {
+		return descrip;
 	}
-	public void setDominio(String dominio) {
-		this.dominio = dominio;
+	public void setDescrip(String descrip) {
+		this.descrip = descrip;
 	}
-	private int idV;
-	private String marca;
-	private String modelo;
-	private String dominio;
 	
 	
 	

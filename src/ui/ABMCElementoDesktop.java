@@ -7,9 +7,11 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlers.CtrlABMPersona;
-import entity.Categoria;
-import entity.Persona;
+import controlers.CtrlABMElemento;
+
+import entity.TipoElemento;
+import entity.Elemento;
+
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -30,18 +32,16 @@ import java.awt.event.ActionEvent;
 
 public class ABMCElementoDesktop extends JInternalFrame {
 
-	private CtrlABMPersona ctrl=new CtrlABMPersona();
+	private CtrlABMElemento ctrl=new CtrlABMElemento();
 	
 	private JPanel contentPane;
-	private JTextField txtDni;
-	private JTextField txtNombre;
-	private JTextField txtApellido;
-	private JCheckBox chkHabilitado;
+	private JTextField txtElemento;
+	private JTextField txtDescripcion;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnModificar;
 	private JTextField txtId;
-	private JComboBox cboCategoria;
+	private JComboBox cboTipo;
 
 	/**
 	 * Launch the application.
@@ -70,23 +70,15 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblDni = new JLabel("DNI");
+		JLabel lblElemento = new JLabel("Elemento");
 		
-		txtDni = new JTextField();
-		txtDni.setColumns(10);
+		JLabel lblDescripcion = new JLabel("Descripcion");
 		
-		JLabel lblNombre = new JLabel("Nombre");
+		txtElemento = new JTextField();
+		txtElemento.setColumns(10);
 		
-		JLabel lblApellido = new JLabel("Apellido");
-		
-		txtNombre = new JTextField();
-		txtNombre.setColumns(10);
-		
-		txtApellido = new JTextField();
-		txtApellido.setColumns(10);
-		
-		chkHabilitado = new JCheckBox("Habilitado");
-		chkHabilitado.setSelected(true);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
@@ -130,9 +122,9 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		txtId.setEditable(false);
 		txtId.setColumns(10);
 		
-		JLabel lblCategoria = new JLabel("Categoria");
+		JLabel lblTipoElemento = new JLabel("Tipo Elemento");
 		
-		cboCategoria = new JComboBox();
+		cboTipo = new JComboBox();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -150,28 +142,21 @@ public class ABMCElementoDesktop extends JInternalFrame {
 									.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
 									.addComponent(btnBuscar, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblCategoria)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(cboCategoria, 0, 411, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNombre)
-										.addComponent(lblDni))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtNombre, GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-										.addComponent(txtDni, GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblApellido)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtApellido, GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(101)
 									.addComponent(btnBorrar)
 									.addGap(18)
+									.addComponent(btnModificar))
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(chkHabilitado)
-										.addComponent(btnModificar))))
+										.addComponent(lblTipoElemento)
+										.addComponent(lblDescripcion)
+										.addComponent(lblElemento))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(txtElemento, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+											.addComponent(txtDescripcion, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+										.addComponent(cboTipo, 0, 237, Short.MAX_VALUE))))
 							.addGap(205)))
 					.addGap(128))
 		);
@@ -185,23 +170,17 @@ public class ABMCElementoDesktop extends JInternalFrame {
 						.addComponent(btnBuscar, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDni)
-						.addComponent(txtDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblElemento)
+						.addComponent(txtElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNombre)
-						.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblApellido)
-						.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblDescripcion)
+						.addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblCategoria)
-						.addComponent(cboCategoria, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-					.addComponent(chkHabilitado)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(lblTipoElemento)
+						.addComponent(cboTipo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAgregar)
 						.addComponent(btnBorrar)
@@ -214,8 +193,8 @@ public class ABMCElementoDesktop extends JInternalFrame {
 
 	private void cargarListas() {
 		try {
-			this.cboCategoria.setModel(new DefaultComboBoxModel(ctrl.getCategorias().toArray()));
-			this.cboCategoria.setSelectedIndex(-1);
+			this.cboTipo.setModel(new DefaultComboBoxModel(ctrl.getTipos().toArray()));
+			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
@@ -224,7 +203,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	protected void buscarClick() {
 		try {
 			//??
-			this.mapearAForm(ctrl.getByDni(this.mapearDeForm()));
+			this.mapearAForm(ctrl.getByNombre(this.mapearDeForm()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
@@ -232,13 +211,13 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	}
 	
 	protected void agregarClick() {
-		Persona p = this.mapearDeForm();
+		Elemento e = this.mapearDeForm();
 		try{
-			ctrl.add(p);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			ctrl.add(e);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
-		this.txtId.setText(String.valueOf(p.getId()));
+		this.txtId.setText(String.valueOf(e.getId()));
 		
 	}
 	
@@ -258,32 +237,31 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		}
 	}
 	
-	private void mapearAForm(Persona p){
-		this.txtDni.setText(p.getDni());
-		this.txtNombre.setText(p.getNombre());
-		this.txtApellido.setText(p.getApellido());
-		this.chkHabilitado.setSelected(p.isHabilitado());
-		this.txtId.setText(String.valueOf(p.getId()));
-		this.cboCategoria.setSelectedItem(p.getCategoria());
+	private void mapearAForm(Elemento e){
+	
+		this.txtElemento.setText(e.getNombre());
+		this.txtDescripcion.setText(e.getDescrip());
+		this.txtId.setText(String.valueOf(e.getId()));
+		this.cboTipo.setSelectedItem(e.getTipoElem());
 	}
 	
-	private Persona mapearDeForm(){
-		Persona p=new Persona();
+	private Elemento mapearDeForm(){
+		Elemento e=new Elemento();
 		
 		if(!this.txtId.getText().isEmpty()){
-			p.setId(Integer.parseInt(this.txtId.getText()));
+			e.setId(Integer.parseInt(this.txtId.getText()));
 		}
-		p.setDni(this.txtDni.getText());
-		p.setNombre(this.txtNombre.getText());
-		p.setApellido(this.txtApellido.getText());
-		p.setHabilitado(this.chkHabilitado.isSelected());
-		if (cboCategoria.getSelectedIndex() != -1){
-			p.setCategoria((Categoria)this.cboCategoria.getSelectedItem());
+		
+		e.setNombre(this.txtElemento.getText());
+		e.setDescrip(this.txtDescripcion.getText());
+		
+		if (cboTipo.getSelectedIndex() != -1){
+			e.setTipoElem((TipoElemento)this.cboTipo.getSelectedItem());
 		}
-		return p;
+		return e;
 	}
 	
-	public void showPersona(Persona p){
-		this.mapearAForm(p);
+	public void showElemento(Elemento e){
+		this.mapearAForm(e);
 	}
 }
