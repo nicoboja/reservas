@@ -30,10 +30,8 @@ public class DataPersona {
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
-					
 					p.getCategoria().setId(rs.getInt("idC"));
 					p.getCategoria().setDescripcion(rs.getString("nivel"));
-					
 					pers.add(p);
 				}
 			}

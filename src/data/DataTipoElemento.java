@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import entity.Elemento;
 import entity.TipoElemento;
 
 public class DataTipoElemento {
@@ -18,12 +17,13 @@ public class DataTipoElemento {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from tipoelemento where nombre=?");
-			stmt.setString(1, te.getNombre());
+					"select * from tipoelemento where descripcion=?");
+			stmt.setString(1, te.getDescripcion());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
 					tipoElem.setIdT(rs.getInt("idT"));
-					tipoElem.setNombre(rs.getString("nombre"));
+					tipoElem.setDescripcion(rs.getString("descripcion"));
+				
 			}
 			
 		} catch (Exception e1) {
@@ -40,30 +40,27 @@ public class DataTipoElemento {
 		return tipoElem;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	public ArrayList<TipoElemento> getAll() throws Exception{
 		Statement stmt=null;
 		ResultSet rs=null;
-		ArrayList<TipoElemento> tipoelementos= new ArrayList<TipoElemento>();
+		ArrayList<TipoElemento> tiposelemento= new ArrayList<TipoElemento>();
 		try {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
 			rs = stmt.executeQuery("select * from tipoelemento");
 			if(rs!=null){
 				while(rs.next()){
-					TipoElemento tipoElem=new TipoElemento();
-					tipoElem.setIdT(rs.getInt("idT"));
-					tipoElem.setNombre(rs.getString("descripcion"));
-					tipoelementos.add(tipoElem);
+					TipoElemento t=new TipoElemento();
+					t.setIdT(rs.getInt("idT"));
+					t.setDescripcion(rs.getString("descripcion"));
+					//
+					System.out.println(t.getDescripcion()+t.getIdT());
+					//
+					tiposelemento.add(t);
 				}
 			}
 		} catch (SQLException e) {
-			
 			throw e;
 		} 
 
@@ -76,7 +73,7 @@ public class DataTipoElemento {
 			e.printStackTrace();
 		}
 		
-		return tipoelementos;
+		return tiposelemento;
 		
 	}
 	

@@ -11,10 +11,10 @@ public class TipoElemento {
 	public void setIdT(int idT) {
 		this.idT = idT;
 	}
-	public String getNombre() {
+	public String getDescripcion() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
+	public void setDescripcion(String nombre) {
 		this.nombre = nombre;
 	}
 }
