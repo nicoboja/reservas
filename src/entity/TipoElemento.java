@@ -3,7 +3,7 @@ package entity;
 public class TipoElemento {
 
 	private int idT;
-	private String nombre;
+	private String descripcion;
 	
 	public int getIdT() {
 		return idT;
@@ -12,9 +12,9 @@ public class TipoElemento {
 		this.idT = idT;
 	}
 	public String getDescripcion() {
-		return nombre;
+		return descripcion;
 	}
 	public void setDescripcion(String nombre) {
-		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 }

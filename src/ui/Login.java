@@ -17,7 +17,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario;
-	private JTextField txtContraseña;
+	private JTextField txtPass;
 
 	/**
 	 * Launch the application.
@@ -54,18 +54,18 @@ public class Login extends JFrame {
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtContraseña = new JTextField();
-		txtContraseña.setBounds(137, 125, 197, 26);
-		contentPane.add(txtContraseña);
-		txtContraseña.setColumns(10);
+		txtPass = new JTextField();
+		txtPass.setBounds(137, 125, 197, 26);
+		contentPane.add(txtPass);
+		txtPass.setColumns(10);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setBounds(43, 77, 61, 16);
 		contentPane.add(lblUsuario);
 		
-		JLabel lblContrasea = new JLabel("Contraseña");
-		lblContrasea.setBounds(43, 130, 98, 16);
-		contentPane.add(lblContrasea);
+		JLabel lblPassa = new JLabel("Contraseña");
+		lblPassa.setBounds(43, 130, 98, 16);
+		contentPane.add(lblPassa);
 		
 		JButton btnIngresar = new JButton("Ingresar");
 		btnIngresar.setBounds(217, 193, 117, 29);

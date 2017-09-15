@@ -23,9 +23,7 @@ public class DataTipoElemento {
 			if(rs!=null && rs.next()){
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
-				
-			}
-			
+			}			
 		} catch (Exception e1) {
 			throw e1;
 		} finally{
@@ -38,45 +36,83 @@ public class DataTipoElemento {
 			}
 		}
 		return tipoElem;
+	}	
+	
+	public void add(TipoElemento te) throws Exception {
+		PreparedStatement stmt=null;
+		try{
+			
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"insert into tipoelemento (descripcion) values (?)");
+			stmt.setString(1, te.getDescripcion());
+			stmt.executeUpdate();
+		}catch (Exception ex){
+			System.out.println("No se ha cargado un elemento");
+			throw ex;
+		}finally{
+			FactoryConexion.getInstancia().releaseConn();
+		}			
 	}
 	
-
+	public void update(TipoElemento te) throws Exception {
+		PreparedStatement stmt=null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update tipoelemento set descripcion=? where idT=?;");
+			stmt.setString(1, te.getDescripcion());
+			stmt.setInt(2, te.getIdT());
+			stmt.execute();		
+			System.out.println("Se Modifico el Tipo de Elemento con ID= "+te.getIdT()+" Descripcion: "+te.getDescripcion());
+		}catch (Exception ex) {
+			System.out.println("Ha fallado el borrado de datos");
+			throw ex;
+		}finally{
+			FactoryConexion.getInstancia().releaseConn();
+		}		
+	}
+	
+	public void delete(TipoElemento te) throws Exception {
+		PreparedStatement stmt=null;
+		try{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"delete from tipoelemento where idT=?");
+			stmt.setInt(1, te.getIdT());
+			stmt.executeUpdate();			
+		}catch (Exception ex) {
+			System.out.println("Ha fallado el borrado de datos");
+			throw ex;
+		}finally{
+			FactoryConexion.getInstancia().releaseConn();
+		}		
+	}
+	
 	public ArrayList<TipoElemento> getAll() throws Exception{
 		Statement stmt=null;
 		ResultSet rs=null;
-		ArrayList<TipoElemento> tiposelemento= new ArrayList<TipoElemento>();
+		ArrayList<TipoElemento> tipoelementos= new ArrayList<TipoElemento>();
 		try {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
 			rs = stmt.executeQuery("select * from tipoelemento");
 			if(rs!=null){
 				while(rs.next()){
-					TipoElemento t=new TipoElemento();
-					t.setIdT(rs.getInt("idT"));
-					t.setDescripcion(rs.getString("descripcion"));
-					//
-					System.out.println(t.getDescripcion()+t.getIdT());
-					//
-					tiposelemento.add(t);
+					TipoElemento tipoElem=new TipoElemento();
+					tipoElem.setIdT(rs.getInt("idT"));
+					tipoElem.setDescripcion(rs.getString("descripcion"));
+					tipoelementos.add(tipoElem);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e) {			
 			throw e;
 		} 
-
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			
+		} catch (SQLException e) {			
 			e.printStackTrace();
-		}
-		
-		return tiposelemento;
-		
-	}
-	
-	
+		}		
+		return tipoelementos;		
+	}	
 
 }
