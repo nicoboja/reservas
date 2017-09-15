@@ -10,14 +10,17 @@ public class DataElemento {
 
 	public void add(Elemento e) throws Exception {
 		PreparedStatement stmt=null;
+		ResultSet keyResultSet=null;
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into elemento (idTipo, nombre, descripcion) values (?,?,?)");
+					"insert into elemento (idT, nombre, descripcion) values (?,?,?)");
 			stmt.setInt(1, e.getTipoElem().getIdT());
 			stmt.setString(2, e.getNombre());
 			stmt.setString(3, e.getDescrip());
 			stmt.executeUpdate();
+			
+			
 		}catch (Exception ex){
 			System.out.println("No se ha cargado un elemento");
 			throw ex;
