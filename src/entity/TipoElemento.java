@@ -5,6 +5,7 @@ public class TipoElemento {
 	private int idT;
 	private String descripcion;
 	
+	
 	public int getIdT() {
 		return idT;
 	}
@@ -14,7 +15,9 @@ public class TipoElemento {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String nombre) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	
 }

@@ -80,6 +80,18 @@ public class MainWindow {
 		
 		JMenuItem mntmGestionarReservas = new JMenuItem("Gestionar Reservas");
 		mnReservacs.add(mntmGestionarReservas);
+		
+		JMenu mnTiposElementos = new JMenu("Tipos Elementos");
+		menuBar.add(mnTiposElementos);
+		
+		JMenuItem mntmGestionarTiposElementos = new JMenuItem("Gestionar Tipos Elementos");
+		mntmGestionarTiposElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mnuABMCTiposElementosClick();
+			}
+		});
+		mnTiposElementos.add(mntmGestionarTiposElementos);
+		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
@@ -93,6 +105,11 @@ public class MainWindow {
 	}
 	protected void mnuABMCElementoClick() {
 		ABMCElementoDesktop pd= new ABMCElementoDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
+	}
+	protected void mnuABMCTiposElementosClick(){
+		ABMCTipoElementoDesktop pd= new ABMCTipoElementoDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}
