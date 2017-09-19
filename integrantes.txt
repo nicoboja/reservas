@@ -3,5 +3,5 @@ Integrantes:
 	Legajo 35112 Bojanich Nicolas 
 	
 agregar .sql de base de datos
-	add commit y push
+	
 	

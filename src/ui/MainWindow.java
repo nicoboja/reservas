@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow {
 
@@ -25,9 +27,11 @@ public class MainWindow {
 				try {
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
+					//
 					Login login = new Login();
 					login.setVisible(true);
 					login.setAlwaysOnTop(true);
+					//
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -75,15 +79,34 @@ public class MainWindow {
 		});
 		mnElementos.add(mntmGestionarElementos);
 		
+		JMenuItem mntmTiposElementos = new JMenuItem("Tipos Elementos");
+		
+		mntmTiposElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mnuABMCTipoElementoClick();
+			}
+		});
+		mnElementos.add(mntmTiposElementos);
+		
 		JMenu mnReservacs = new JMenu("Reservas");
 		menuBar.add(mnReservacs);
 		
 		JMenuItem mntmGestionarReservas = new JMenuItem("Gestionar Reservas");
+		mntmGestionarReservas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mnuGestionarReservasClicked();
+			}
+		});
 		mnReservacs.add(mntmGestionarReservas);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
 		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
+	}
+
+	protected void mnuGestionarReservasClicked() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	protected void mnuABMCPersonaClick() {
@@ -93,6 +116,11 @@ public class MainWindow {
 	}
 	protected void mnuABMCElementoClick() {
 		ABMCElementoDesktop pd= new ABMCElementoDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
+	}
+	protected void mnuABMCTipoElementoClick() {
+		ABMCTipoElementoDesktop pd= new ABMCTipoElementoDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}

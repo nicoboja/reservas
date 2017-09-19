@@ -3,7 +3,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -22,7 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class ABMCTipoElementoDesktop extends JFrame {
+public class ABMCTipoElementoDesktop extends JInternalFrame {
 	
 	private CtrlABMTipoElemento ctrl=new CtrlABMTipoElemento();
 
@@ -50,7 +50,7 @@ public class ABMCTipoElementoDesktop extends JFrame {
 	 * Create the frame.
 	 */
 	public ABMCTipoElementoDesktop() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

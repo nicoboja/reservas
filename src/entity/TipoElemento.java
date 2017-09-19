@@ -14,7 +14,23 @@ public class TipoElemento {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String nombre) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	@Override
+	public int hashCode() {
+		return Integer.hashCode(this.idT);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((obj instanceof TipoElemento) &&((TipoElemento)obj).getIdT()==this.idT);
+	}
+	@Override
+	public String toString() {
+		return String.valueOf(idT) + descripcion;
+	}
+	
+	
+	
 }
