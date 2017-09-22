@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -22,13 +23,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class ABMCTipoElementoDesktop extends JFrame {
+public class ABMCTipoElementoDesktop extends JInternalFrame {
 	
 	private CtrlABMTipoElemento ctrl=new CtrlABMTipoElemento();
 
 	private JPanel contentPane;
 	private JTextField txtId;
 	private JTextField txtDescripcion;
+	private JTextField txtMaxPend;
+	private JTextField txtDias;
 
 	/**
 	 * Launch the application.
@@ -103,22 +106,44 @@ public class ABMCTipoElementoDesktop extends JFrame {
 		
 		txtId = new JTextField();
 		txtId.setEnabled(false);
-		txtId.setBounds(121, 26, 48, 22);
+		txtId.setBounds(131, 26, 38, 22);
 		contentPane.add(txtId);
 		txtId.setColumns(10);
 		
 		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(74, 29, 18, 16);
+		lblId.setBounds(102, 29, 18, 16);
 		contentPane.add(lblId);
 		
 		txtDescripcion = new JTextField();
-		txtDescripcion.setBounds(121, 71, 116, 22);
+		txtDescripcion.setBounds(131, 71, 106, 22);
 		contentPane.add(txtDescripcion);
 		txtDescripcion.setColumns(10);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
-		lblDescripcion.setBounds(12, 74, 80, 16);
+		lblDescripcion.setBounds(49, 74, 71, 16);
 		contentPane.add(lblDescripcion);
+		
+		txtMaxPend = new JTextField();
+		txtMaxPend.setBounds(177, 106, 60, 22);
+		contentPane.add(txtMaxPend);
+		txtMaxPend.setColumns(10);
+		
+		txtDias = new JTextField();
+		txtDias.setBounds(177, 141, 60, 22);
+		contentPane.add(txtDias);
+		txtDias.setColumns(10);
+		
+		JLabel lblMaximoPendiente = new JLabel("Maximo Pendiente");
+		lblMaximoPendiente.setBounds(12, 109, 108, 16);
+		contentPane.add(lblMaximoPendiente);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(12, 144, 56, 16);
+		contentPane.add(label);
+		
+		JLabel lblDiasAntesMaximo = new JLabel("Dias Antes Maximo");
+		lblDiasAntesMaximo.setBounds(12, 144, 126, 16);
+		contentPane.add(lblDiasAntesMaximo);
 	}
 	
 	protected void buscarClick() {
@@ -133,6 +158,8 @@ public class ABMCTipoElementoDesktop extends JFrame {
 		TipoElemento te = this.mapearDeForm();
 		try{
 			ctrl.add(te);
+			JOptionPane.showMessageDialog(this, "Se cargo el tipo elemento: "+ te.getDescripcion());
+			limpiarForm();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
@@ -142,6 +169,8 @@ public class ABMCTipoElementoDesktop extends JFrame {
 	protected void borrarClick(){
 		try{
 			ctrl.delete(this.mapearDeForm());
+			JOptionPane.showMessageDialog(this, "Se borro el tipo elemento "+ txtDescripcion.getText()+". ID: "+txtId.getText());
+			limpiarForm();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
@@ -150,6 +179,8 @@ public class ABMCTipoElementoDesktop extends JFrame {
 	protected void modificarClick(){
 		try{
 			ctrl.update(this.mapearDeForm());
+			JOptionPane.showMessageDialog(this, "Se modifico el tipo elemento ID: "+ txtId.getText());
+			limpiarForm();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
@@ -174,5 +205,10 @@ public class ABMCTipoElementoDesktop extends JFrame {
 	
 	public void showElemento(TipoElemento te){
 		this.mapearAForm(te);
+	}
+	
+	private void limpiarForm(){
+		txtId.setText("");
+		txtDescripcion.setText(null);
 	}
 }
