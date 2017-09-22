@@ -190,6 +190,8 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 		
 		this.txtId.setText(String.valueOf(te.getIdT()));
 		this.txtDescripcion.setText(te.getDescripcion());
+		this.txtDias.setText(String.valueOf(te.getDiasMaxAnt()));
+		this.txtMaxPend.setText(String.valueOf(te.getCantMax()));
 	}
 	
 	private TipoElemento mapearDeForm(){
@@ -198,7 +200,12 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 		if(!this.txtId.getText().isEmpty()){
 			te.setIdT(Integer.parseInt(this.txtId.getText()));
 		}
-	
+		if(!this.txtMaxPend.getText().isEmpty()){
+			te.setCantMax(Integer.parseInt(this.txtMaxPend.getText()));
+		}
+		if(!this.txtDias.getText().isEmpty()){
+			te.setDiasMaxAnt(Integer.parseInt(this.txtDias.getText()));
+		}
 		te.setDescripcion(this.txtDescripcion.getText());
 		return te;
 	}
@@ -208,7 +215,10 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 	}
 	
 	private void limpiarForm(){
-		txtId.setText("");
+		txtId.setText(null);
 		txtDescripcion.setText(null);
+		txtMaxPend.setText(null);
+		txtDias.setText(null);
+		
 	}
 }
