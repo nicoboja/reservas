@@ -8,6 +8,7 @@ public class FactoryConexion {
 	
 	private String driver="com.mysql.jdbc.Driver";
 	private String host="localhost";
+	private String hostM="127.0.0.1";
 	private String port="3306";
 	private String user="java";
 	private String password="java";
@@ -41,7 +42,14 @@ public class FactoryConexion {
 			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
 			}
 		} catch (SQLException e) {
-			throw new AppDataException(e, "Error al conectar a la base de datos");
+			try {
+				if(conn==null || conn.isClosed()){	
+					conn = DriverManager.getConnection(
+				        "jdbc:mysql://"+hostM+":"+port+"/"+db+"?user="+user+"&password="+password);
+				}
+			}catch (SQLException ex){
+			throw new AppDataException(ex, "Error al conectar a la base de datos");
+			}
 		}
 		cantConn++;
 		return conn;
