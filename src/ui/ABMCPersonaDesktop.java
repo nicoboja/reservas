@@ -63,6 +63,8 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ABMCPersonaDesktop() {
+		setTitle("Gestion de Personas");
+		setMaximizable(true);
 		setClosable(true);
 		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 377, 350);

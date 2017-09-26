@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 
 public class ABMCTipoElementoDesktop extends JInternalFrame {
 	
@@ -52,7 +53,9 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ABMCTipoElementoDesktop() {
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setMaximizable(true);
+		setClosable(true);
+		setTitle("Gestionar Tipo de Elemento");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -63,6 +63,8 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ABMCElementoDesktop() {
+		setTitle("Gestion de Elementos");
+		setMaximizable(true);
 		setClosable(true);
 		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 377, 350);

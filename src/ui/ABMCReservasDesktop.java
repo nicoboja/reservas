@@ -31,7 +31,8 @@ public class ABMCReservasDesktop extends JFrame {
 	 * Create the frame.
 	 */
 	public ABMCReservasDesktop() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Gestion de Reservas");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
