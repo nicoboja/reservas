@@ -33,7 +33,4 @@ public class Elemento {
 		this.descrip = descrip;
 	}
 	
-	
-	
-
 }

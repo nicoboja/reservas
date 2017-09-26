@@ -85,7 +85,7 @@ public class MainWindow {
 		
 		mntmTiposElementos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mnuABMCTipoElementoClick();
+				mnuABMCTiposElementosClick();
 			}
 		});
 		mnElementos.add(mntmTiposElementos);
@@ -100,6 +100,18 @@ public class MainWindow {
 			}
 		});
 		mnReservacs.add(mntmGestionarReservas);
+		
+		JMenu mnTiposElementos = new JMenu("Tipos Elementos");
+		menuBar.add(mnTiposElementos);
+		
+		JMenuItem mntmGestionarTiposElementos = new JMenuItem("Gestionar Tipos Elementos");
+		mntmGestionarTiposElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mnuABMCTiposElementosClick();
+			}
+		});
+		mnTiposElementos.add(mntmGestionarTiposElementos);
+		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
@@ -121,7 +133,8 @@ public class MainWindow {
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}
-	protected void mnuABMCTipoElementoClick() {
+
+	protected void mnuABMCTiposElementosClick(){
 		ABMCTipoElementoDesktop pd= new ABMCTipoElementoDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);

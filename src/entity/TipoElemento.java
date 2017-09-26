@@ -4,6 +4,9 @@ public class TipoElemento {
 
 	private int idT;
 	private String descripcion;
+	private int diasMaxAnt;
+	private int cantMax;
+	
 	
 	public int getIdT() {
 		return idT;
@@ -17,6 +20,20 @@ public class TipoElemento {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public int getDiasMaxAnt() {
+		return diasMaxAnt;
+	}
+	public void setDiasMaxAnt(int diasMaxAnt) {
+		this.diasMaxAnt = diasMaxAnt;
+	}
+	public int getCantMax() {
+		return cantMax;
+	}
+	public void setCantMax(int cantMax) {
+		this.cantMax = cantMax;
+	}
+		
 	@Override
 	public int hashCode() {
 		return Integer.hashCode(this.idT);
@@ -29,8 +46,5 @@ public class TipoElemento {
 	@Override
 	public String toString() {
 		return String.valueOf(idT) + descripcion;
-	}
-	
-	
-	
+	}	
 }
