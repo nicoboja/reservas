@@ -27,11 +27,7 @@ public class MainWindow {
 				try {
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
-					//
-					Login login = new Login();
-					login.setVisible(true);
-					login.setAlwaysOnTop(true);
-					//
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +46,12 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//
+		Login login = new Login();
+		login.setVisible(true);
+		login.setAlwaysOnTop(true);
+		//
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 678, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

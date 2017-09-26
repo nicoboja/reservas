@@ -193,6 +193,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 
 	private void cargarListas() {
 		try {
+			
 			this.cboTipo.setModel(new DefaultComboBoxModel(ctrl.getTipos().toArray()));
 			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
@@ -202,7 +203,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 
 	protected void buscarClick() {
 		try {
-			//??
+			
 			this.mapearAForm(ctrl.getByNombre(this.mapearDeForm()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
