@@ -23,6 +23,8 @@ public class DataTipoElemento {
 			if(rs!=null && rs.next()){
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
+					tipoElem.setCantMax(rs.getInt("cantMax"));
+					tipoElem.setDiasMaxAnt(rs.getInt("diasAnticipo"));
 			}			
 		} catch (Exception e1) {
 			throw e1;
@@ -43,11 +45,13 @@ public class DataTipoElemento {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into tipoelemento (descripcion) values (?)");
+					"insert into tipoelemento (descripcion, cantMax, diasAnticipo) values (?,?,?)");
 			stmt.setString(1, te.getDescripcion());
+			stmt.setInt(2, te.getCantMax());
+			stmt.setInt(3, te.getDiasMaxAnt());
 			stmt.executeUpdate();
 		}catch (Exception ex){
-			System.out.println("No se ha cargado un elemento");
+			System.out.println("No se ha cargado el tipo elemento");
 			throw ex;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
@@ -58,13 +62,14 @@ public class DataTipoElemento {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update tipoelemento set descripcion=? where idT=?;");
+					"update tipoelemento set descripcion=?,  diasAnticipo=?, cantMax=? where idT=?");
 			stmt.setString(1, te.getDescripcion());
-			stmt.setInt(2, te.getIdT());
-			stmt.execute();		
-			System.out.println("Se Modifico el Tipo de Elemento con ID= "+te.getIdT()+" Descripcion: "+te.getDescripcion());
+			stmt.setInt(2, te.getDiasMaxAnt());
+			stmt.setInt(3, te.getCantMax());
+			stmt.setInt(4, te.getIdT());
+			stmt.executeUpdate();					
 		}catch (Exception ex) {
-			System.out.println("Ha fallado el borrado de datos");
+			System.out.println("Ha fallado la modificacion de datos");
 			throw ex;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
@@ -99,6 +104,8 @@ public class DataTipoElemento {
 					TipoElemento tipoElem=new TipoElemento();
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
+					tipoElem.setCantMax(rs.getInt("cantMax"));
+					tipoElem.setDiasMaxAnt(rs.getInt("diasAnticipo"));
 					tipoelementos.add(tipoElem);
 				}
 			}
