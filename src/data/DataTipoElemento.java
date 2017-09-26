@@ -23,8 +23,8 @@ public class DataTipoElemento {
 			if(rs!=null && rs.next()){
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
-					tipoElem.setCantMax(rs.getInt("cantMax"));
-					tipoElem.setDiasMaxAnt(rs.getInt("diasAnticipo"));
+					tipoElem.setCantMax(rs.getInt("tmax"));
+					tipoElem.setDiasMaxAnt(rs.getInt("diasant"));
 			}			
 		} catch (Exception e1) {
 			throw e1;
@@ -45,7 +45,7 @@ public class DataTipoElemento {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into tipoelemento (descripcion, cantMax, diasAnticipo) values (?,?,?)");
+					"insert into tipoelemento (descripcion, tmax, diasant) values (?,?,?)");
 			stmt.setString(1, te.getDescripcion());
 			stmt.setInt(2, te.getCantMax());
 			stmt.setInt(3, te.getDiasMaxAnt());
@@ -62,7 +62,7 @@ public class DataTipoElemento {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update tipoelemento set descripcion=?,  diasAnticipo=?, cantMax=? where idT=?");
+					"update tipoelemento set descripcion=?,  diasant=?, tmax=? where idT=?");
 			stmt.setString(1, te.getDescripcion());
 			stmt.setInt(2, te.getDiasMaxAnt());
 			stmt.setInt(3, te.getCantMax());
@@ -104,8 +104,8 @@ public class DataTipoElemento {
 					TipoElemento tipoElem=new TipoElemento();
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
-					tipoElem.setCantMax(rs.getInt("cantMax"));
-					tipoElem.setDiasMaxAnt(rs.getInt("diasAnticipo"));
+					tipoElem.setCantMax(rs.getInt("tmax"));
+					tipoElem.setDiasMaxAnt(rs.getInt("diasant"));
 					tipoelementos.add(tipoElem);
 				}
 			}
