@@ -35,7 +35,7 @@ public class DataElemento {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"delete from elemento where idE=?");
 			stmt.setInt(1, e.getId());
-			stmt.executeQuery();			
+			stmt.execute();			
 		}catch (Exception e1) {
 			System.out.println("Ha fallado el borrado de datos");
 			throw e1;
@@ -46,19 +46,26 @@ public class DataElemento {
 	
 	
 	public Elemento getByNombre(Elemento e) throws Exception{
-	
-		Elemento elem=new Elemento();
+		Elemento elem= null;
+		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from elemento where nombre=?");
+					"select e.idE, e.`nombre`, e.`descripcion`, t.idT, t.descripcion from elemento e inner join tipoelemento t  on e.`idT` = t.idT where nombre=?");
 			stmt.setString(1, e.getNombre());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
+					elem =new Elemento();
+					elem.setTipoElem(new TipoElemento());
+					
 					elem.setId(rs.getInt("idE"));
 					elem.setNombre(rs.getString("nombre"));
 					elem.setDescrip(rs.getString("descripcion"));
+					elem.getTipoElem().setDescripcion(rs.getString("descripcion"));
+					elem.getTipoElem().setIdT(rs.getInt("idT"));
+				
+					
 			}
 			
 		} catch (Exception e1) {

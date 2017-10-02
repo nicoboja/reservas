@@ -25,6 +25,9 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
+					
+					
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
 				
@@ -47,9 +50,10 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		//
-		Login login = new Login();
+		Log login = new Log();
 		login.setVisible(true);
 		login.setAlwaysOnTop(true);
+		
 		//
 		
 		frame = new JFrame();

@@ -7,6 +7,26 @@ public class Persona {
 	private String dni;
 	private boolean habilitado;
 	private Categoria categoria;
+	private String pass;
+	private String uss;
+	
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getUss() {
+		return uss;
+	}
+
+	public void setUss(String uss) {
+		this.uss = uss;
+	}
+
+	
 	
 	public Categoria getCategoria(){
 		return categoria;
@@ -65,6 +85,12 @@ public class Persona {
 					
 
 	}
+	
+	public boolean equalsUss(Object p){
+		return (p instanceof Persona) &&
+			 (((Persona)p).getUss().equals(this.getUss()));
+	}
+
 }
 
 

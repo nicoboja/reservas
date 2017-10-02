@@ -195,7 +195,6 @@ public class ABMCElementoDesktop extends JInternalFrame {
 
 	private void cargarListas() {
 		try {
-			
 			this.cboTipo.setModel(new DefaultComboBoxModel(ctrl.getTipos().toArray()));
 			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
@@ -205,7 +204,6 @@ public class ABMCElementoDesktop extends JInternalFrame {
 
 	protected void buscarClick() {
 		try {
-			
 			this.mapearAForm(ctrl.getByNombre(this.mapearDeForm()));
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
@@ -217,6 +215,8 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		Elemento e = this.mapearDeForm();
 		try{
 			ctrl.add(e);
+			JOptionPane.showMessageDialog(this, " Se cargo el elemento: "+ e.getDescrip());
+			this.limpiarForm();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
@@ -227,6 +227,8 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	protected void borrarClick(){
 		try{
 			ctrl.delete(this.mapearDeForm());
+			JOptionPane.showMessageDialog(this, " Se borro el elemento");
+			this.limpiarForm();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
@@ -235,21 +237,23 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	protected void modificarClick(){
 		try{
 			ctrl.update(this.mapearDeForm());
+			JOptionPane.showMessageDialog(this, " Se modifico el elemento");
+			this.limpiarForm();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
 	
 	private void mapearAForm(Elemento e){
-	
 		this.txtElemento.setText(e.getNombre());
 		this.txtDescripcion.setText(e.getDescrip());
 		this.txtId.setText(String.valueOf(e.getId()));
 		this.cboTipo.setSelectedItem(e.getTipoElem());
+		
 	}
 	
 	private Elemento mapearDeForm(){
-		Elemento e=new Elemento();
+		Elemento e = new Elemento();
 		
 		if(!this.txtId.getText().isEmpty()){
 			e.setId(Integer.parseInt(this.txtId.getText()));
@@ -267,4 +271,12 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	public void showElemento(Elemento e){
 		this.mapearAForm(e);
 	}
+	
+	private void limpiarForm(){
+		txtId.setText(null);
+		txtDescripcion.setText(null);
+		txtElemento.setText(null);
+		cboTipo.setSelectedIndex(-1);
+	}
+	
 }

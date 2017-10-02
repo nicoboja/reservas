@@ -14,7 +14,6 @@ public class CtrlABMPersona {
 	
 	private ArrayList<Persona> pers;
 	
-	
 	public CtrlABMPersona(){
 		dataPer = new DataPersona();
 		dataCat = new DataCategoria();
@@ -26,10 +25,34 @@ public class CtrlABMPersona {
 	}
 	
 	public void delete(Persona p)throws Exception{
-		dataPer.remove(p);
+		dataPer.remove(p);		
+	}
+	
+	public Boolean logueo(Persona p) throws Exception{
+		Boolean rta = false;
+		Persona pdata = new Persona();
+		pdata = this.getByUss(p);
+		System.out.println(pdata.getUss()+" "+pdata.getPass()+" de BD");
+		System.out.println(p.getUss()+" "+p.getPass()+" de mapeo");
+		if(pdata.equalsUss(p)){
+			rta = true;
+			System.out.println("VERDADERO");
+		}
+		
+		return rta;
 		
 		
 	}
+	public Persona getByUss(Persona p) throws Exception{
+		return dataPer.getByUss(p);
+	}
+	
+//	public Persona getByUss(String uss)throws Exception{
+//		Persona p=new Persona();
+//		p.setUss(uss);
+//		return getByUss(p);
+//	}
+	
 	
 
 	public void update(Persona p)throws Exception{
