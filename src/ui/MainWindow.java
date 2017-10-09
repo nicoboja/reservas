@@ -97,13 +97,16 @@ public class MainWindow {
 		JMenu mnReservacs = new JMenu("Reservas");
 		menuBar.add(mnReservacs);
 		
-		JMenuItem mntmGestionarReservas = new JMenuItem("Gestionar Reservas");
+		JMenuItem mntmGestionarReservas = new JMenuItem("Nueva Reserva");
 		mntmGestionarReservas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mnuGestionarReservasClicked();
 			}
 		});
 		mnReservacs.add(mntmGestionarReservas);
+		
+		JMenuItem mntmReservasPendientes = new JMenuItem("Reservas Pendientes");
+		mnReservacs.add(mntmReservasPendientes);
 		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -112,7 +115,9 @@ public class MainWindow {
 	}
 
 	protected void mnuGestionarReservasClicked() {
-		// TODO Auto-generated method stub
+		AReservasDesktop pd= new AReservasDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
 		
 	}
 

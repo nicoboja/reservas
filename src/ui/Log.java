@@ -46,7 +46,7 @@ public class Log extends JDialog {
 	 * Create the dialog.
 	 */
 	public Log() {
-		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setModal(true);
 		setResizable(false);
@@ -70,7 +70,7 @@ public class Log extends JDialog {
 		lblUsuario.setBounds(118, 57, 61, 16);
 		contentPanel.add(lblUsuario);
 		
-		JLabel lblContrasea = new JLabel("Contraseña");
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
 		lblContrasea.setBounds(118, 112, 74, 16);
 		contentPanel.add(lblContrasea);
 		{
