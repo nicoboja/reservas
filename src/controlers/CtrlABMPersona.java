@@ -8,6 +8,7 @@ import entity.Categoria;
 import entity.Persona;
 
 public class CtrlABMPersona {
+	public int id = -1;
 
 	private DataPersona dataPer;
 	private DataCategoria dataCat;
@@ -37,6 +38,8 @@ public class CtrlABMPersona {
 		if(pdata.equalsUss(p)){
 			rta = true;
 			System.out.println("VERDADERO");
+			
+			id = pdata.getId();
 		}
 		
 		return rta;
