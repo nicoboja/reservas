@@ -108,8 +108,9 @@ public class MainWindow {
 	}
 
 	protected void mnuGestionarReservasClicked() {
-		// TODO Auto-generated method stub
-		
+		ABMCReservaDesktop pd= new ABMCReservaDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);		
 	}
 
 	protected void mnuABMCPersonaClick() {
