@@ -35,7 +35,7 @@ public class DataElemento {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"delete from elemento where idE=?");
 			stmt.setInt(1, e.getId());
-			stmt.execute();			
+			stmt.executeUpdate();			
 		}catch (Exception e1) {
 			System.out.println("Ha fallado el borrado de datos");
 			throw e1;
@@ -124,7 +124,7 @@ public class DataElemento {
 			stmt.setString(2, e.getDescrip());
 			stmt.setInt(3, e.getTipoElem().getIdT());
 			stmt.setInt(4, e.getId());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			System.out.println("Se Modifico la Persona con ID= "+e.getId()+" Nombre: "+e.getNombre());
 		}catch (Exception e1) {
 			System.out.println("Ha fallado el borrado de datos");

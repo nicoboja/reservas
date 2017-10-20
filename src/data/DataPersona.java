@@ -136,7 +136,7 @@ public class DataPersona {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"delete from persona where idP=?");
 			stmt.setInt(1, p.getId());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			System.out.println("Se borro la Persona con ID= "+p.getId()+" Nombre: "+p.getNombre());
 		}catch (Exception e1) {
 			System.out.println("Ha fallado el borrado de datos");

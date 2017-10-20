@@ -106,6 +106,11 @@ public class MainWindow {
 		mnReservacs.add(mntmGestionarReservas);
 		
 		JMenuItem mntmReservasPendientes = new JMenuItem("Reservas Pendientes");
+		mntmReservasPendientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mnuReservasPendClick();	
+			}
+		});
 		mnReservacs.add(mntmReservasPendientes);
 		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -119,6 +124,12 @@ public class MainWindow {
 		desktopPane.add(pd);
 		pd.setVisible(true);
 		
+	}
+	
+	protected void mnuReservasPendClick() {
+		ReservasPend pd= new ReservasPend();
+		desktopPane.add(pd);
+		pd.setVisible(true);
 	}
 
 	protected void mnuABMCPersonaClick() {
