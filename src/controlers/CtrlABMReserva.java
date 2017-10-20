@@ -18,13 +18,14 @@ public class CtrlABMReserva {
 		ArrayList<Reserva> reserv = new ArrayList<Reserva>();
 		reserv = dataRes.getAllPendientes();
 		System.out.println(reserv.get(1).getElemento());
-		Object[][] datas = new Object[1][];
+		
+		Object[][] datas = new Object[reserv.size()][2];
 		
 		for (int i = 1; i < reserv.size(); i++) {
 			System.out.println("entra en for");
-			
-			datas[1][i] = reserv.get(i).getElemento();
-			datas[1][i] = reserv.get(i).getTipo();
+			int j=0;
+			datas[i][j++] = reserv.get(i).getElemento();
+			datas[i][j++] = reserv.get(i).getTipo();
 		}
 		return datas;
 	}
