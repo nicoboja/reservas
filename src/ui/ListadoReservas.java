@@ -26,7 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ListadoPersonas extends JInternalFrame {
+public class ListadoReservas extends JInternalFrame {
 	
 	private ArrayList<Persona> pers;
 	CtrlABMPersona ctrl= new CtrlABMPersona();
@@ -36,7 +36,7 @@ public class ListadoPersonas extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ListadoPersonas() {
+	public ListadoReservas() {
 		setClosable(true);
 		setBounds(100, 100, 507, 300);
 		
@@ -51,7 +51,6 @@ public class ListadoPersonas extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				btnEditarClick();
-				
 				
 			}
 		});
