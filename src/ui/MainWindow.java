@@ -74,6 +74,15 @@ public class MainWindow {
 		});
 		mnuPersona.add(mnuGestionarPersonas);
 		
+		JMenuItem mntmListadoPersonas = new JMenuItem("Listado Personas");
+		mntmListadoPersonas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mnuListaoPersonaClick();
+				
+			}
+		});
+		mnuPersona.add(mntmListadoPersonas);
+		
 		JMenu mnElementos = new JMenu("Elementos");
 		menuBar.add(mnElementos);
 		
@@ -145,6 +154,11 @@ public class MainWindow {
 
 	protected void mnuABMCTiposElementosClick(){
 		ABMCTipoElementoDesktop pd= new ABMCTipoElementoDesktop();
+		desktopPane.add(pd);
+		pd.setVisible(true);
+	}
+	protected void mnuListaoPersonaClick(){
+		ListadoPersonas pd= new ListadoPersonas();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}
