@@ -6,10 +6,10 @@ import java.sql.Time;
 
 public class Reserva {
 	private int id;
-	private Date fecha;//= new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	private Time hora;
+	private java.sql.Date fecha;//= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	private java.sql.Time hora;
 	private String detalle;
-	private TipoElemento tipo;
+	private Elemento elem;
 	private Persona per;
 	private int CantHoras;
 	
@@ -45,11 +45,11 @@ public class Reserva {
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
 	}
-	public TipoElemento getTipo() {
-		return tipo;
+	public Elemento getElem() {
+		return elem;
 	}
-	public void setTipo(TipoElemento tipo) {
-		this.tipo = tipo;
+	public void setElem(Elemento elem) {
+		this.elem = elem;
 	}
 	public Persona getPer() {
 		return per;

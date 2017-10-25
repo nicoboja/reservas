@@ -33,4 +33,18 @@ public class Elemento {
 		this.descrip = descrip;
 	}
 	
+	@Override
+	public int hashCode() {
+		return Integer.hashCode(this.id);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((obj instanceof Elemento) &&((Elemento)obj).getId()==this.id);
+	}
+	@Override
+	public String toString() {
+		return String.valueOf(id) + nombre;
+	}	
+	
 }

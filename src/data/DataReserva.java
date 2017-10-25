@@ -18,10 +18,10 @@ public class DataReserva {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into reserva (fecha, detalle, idTipo, hora, cantHoras, idPersona) values (?,?,?,?,?,?)");
+					"insert into reserva (fecha, detalle, idElemento, hora, cantHoras, idPersona) values (?,?,?,?,?,?)");
 			stmt.setDate(1, r.getFecha());
 			stmt.setString(2, r.getDetalle());
-			stmt.setInt(3, r.getTipo().getIdT());
+			stmt.setInt(3, r.getElem().getId());
 			stmt.setTime(4, r.getHora());
 			stmt.setInt(5, r.getCantHoras());
 			stmt.setInt(6, r.getPer().getId());
