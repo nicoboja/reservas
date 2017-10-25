@@ -42,7 +42,7 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 	private JButton btnModificar;
 	private JTextField txtId;
 	private JComboBox cboCategoria;
-
+	
 	/**
 	 * Launch the application.
 	 */

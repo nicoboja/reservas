@@ -8,7 +8,7 @@ import entity.Categoria;
 import entity.Persona;
 
 public class CtrlABMPersona {
-	public int id = -1;
+	public int idPer = -1;
 
 	private DataPersona dataPer;
 	private DataCategoria dataCat;
@@ -39,13 +39,19 @@ public class CtrlABMPersona {
 			rta = true;
 			System.out.println("VERDADERO");
 			
-			id = pdata.getId();
+			idPer = pdata.getId();
 		}
 		
 		return rta;
 		
 		
 	}
+	public int getIdP(){
+		return idPer;
+	}
+	
+	
+	
 	public Persona getByUss(Persona p) throws Exception{
 		return dataPer.getByUss(p);
 	}

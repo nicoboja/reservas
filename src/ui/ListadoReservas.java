@@ -37,6 +37,7 @@ public class ListadoReservas extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ListadoReservas() {
+	
 		setClosable(true);
 		setBounds(100, 100, 507, 300);
 		
