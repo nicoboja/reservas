@@ -220,8 +220,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
 		}
-		this.txtId.setText(String.valueOf(e.getId()));
-		
+		this.txtId.setText(String.valueOf(e.getId()));		
 	}
 	
 	protected void borrarClick(){

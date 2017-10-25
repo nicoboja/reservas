@@ -1,36 +1,66 @@
 package entity;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Reserva {
-	
 	private int id;
-	private String tipo;
-	private String elemento;
+	private java.sql.Date fecha;//= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	private java.sql.Time hora;
+	private String detalle;
+	private Elemento elem;
+	private Persona per;
+	private int CantHoras;
 	
+	
+	public int getCantHoras() {
+		return CantHoras;
+	}
+	public void setCantHoras(int cantHoras) {
+		CantHoras = cantHoras;
+	}
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	public Time getHora() {
+		return hora;
+	}
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTipo() {
-		return tipo;
+	
+	public String getDetalle() {
+		return detalle;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
 	}
-	public String getElemento() {
-		return elemento;
+	public Elemento getElem() {
+		return elem;
 	}
-	public void setElemento(String elemento) {
-		this.elemento = elemento;
+	public void setElem(Elemento elem) {
+		this.elem = elem;
+	}
+	public Persona getPer() {
+		return per;
+	}
+	public void setPer(Persona per) {
+		this.per = per;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((elemento == null) ? 0 : elemento.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 	@Override
@@ -39,24 +69,13 @@ public class Reserva {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Reserva))
 			return false;
 		Reserva other = (Reserva) obj;
-		if (elemento == null) {
-			if (other.elemento != null)
-				return false;
-		} else if (!elemento.equals(other.elemento))
-			return false;
 		if (id != other.id)
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
 	}
 
-	
 	
 }

@@ -18,12 +18,11 @@ public class DataElemento {
 			stmt.setInt(1, e.getTipoElem().getIdT());
 			stmt.setString(2, e.getNombre());
 			stmt.setString(3, e.getDescrip());
-			stmt.executeUpdate();
+			stmt.executeUpdate();			
 			
-			
-		}catch (Exception ex){
+		}catch (Exception e1){
 			System.out.println("No se ha cargado un elemento");
-			throw ex;
+			throw e1;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}			

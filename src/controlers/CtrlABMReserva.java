@@ -2,34 +2,43 @@ package controlers;
 
 import java.util.ArrayList;
 
+import data.DataElemento;
 import data.DataReserva;
+import data.DataTipoElemento;
+import entity.Elemento;
 import entity.Reserva;
+import entity.TipoElemento;
 
 public class CtrlABMReserva {
-	private DataReserva dataRes = new DataReserva();
+	private DataReserva dataRes=new DataReserva();
+	private DataTipoElemento dataTipo=new DataTipoElemento();
+	private DataElemento dataElem=new DataElemento();
 	
+	public void add(Reserva r) throws Exception{
+		dataRes.add(r);
+	}
 	
+	public ArrayList<Reserva> getAll()throws Exception{
+		return dataRes.getAll();
+	}
 	
+	public Reserva getById(Reserva r) throws Exception{
+		return this.dataRes.getById(r);		
+	}
 	
-
-	public Object[][] getAllReservas() throws Exception{
-		
-		
-		ArrayList<Reserva> reserv = new ArrayList<Reserva>();
-		reserv = dataRes.getAllPendientes();
-		System.out.println(reserv.get(1).getElemento());
-		
-		Object[][] datas = new Object[reserv.size()][2];
-		
-		for (int i = 1; i < reserv.size(); i++) {
-			System.out.println("entra en for");
-			int j=0;
-			datas[i][j++] = reserv.get(i).getElemento();
-			datas[i][j++] = reserv.get(i).getTipo();
-		}
-		return datas;
+	public void delete(Reserva r) throws Exception{
+		dataRes.delete(r);
+	}
+	
+	public ArrayList<TipoElemento> getTipos() throws Exception{
+		return dataTipo.getAll();
+	}
+	public void update(Reserva r)throws Exception{
+		dataRes.update(r);
 	}
 
+	public ArrayList<Elemento> getElementos() throws Exception{
+		return dataElem.getAll();
+	}
 
-	
 }

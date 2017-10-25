@@ -10,8 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class MainWindow {
 
@@ -117,7 +116,7 @@ public class MainWindow {
 		JMenuItem mntmReservasPendientes = new JMenuItem("Reservas Pendientes");
 		mntmReservasPendientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mnuReservasPendClick();	
+//				mnuReservasPendClick();	
 			}
 		});
 		mnReservacs.add(mntmReservasPendientes);
@@ -129,17 +128,19 @@ public class MainWindow {
 	}
 
 	protected void mnuGestionarReservasClicked() {
+
 		AReservasDesktop pd= new AReservasDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 		
 	}
 	
-	protected void mnuReservasPendClick() {
-		ReservasPend pd= new ReservasPend();
-		desktopPane.add(pd);
-		pd.setVisible(true);
-	}
+//	protected void mnuReservasPendClick() {
+//		ReservasPend pd= new ReservasPend();
+//		desktopPane.add(pd);
+//		pd.setVisible(true);
+//
+//	}
 
 	protected void mnuABMCPersonaClick() {
 		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
