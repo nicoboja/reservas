@@ -129,7 +129,7 @@ public class MainWindow {
 
 	protected void mnuGestionarReservasClicked() {
 
-		AReservasDesktop pd= new AReservasDesktop();
+		ABMCReservaDesktop pd= new ABMCReservaDesktop();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 		
