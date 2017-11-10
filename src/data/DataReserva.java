@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
+import entity.Categoria;
+import entity.Reserva;
 import entity.Reserva;
 import util.AppDataException;
 
@@ -122,6 +123,42 @@ public class DataReserva {
 	public Reserva getById(Reserva r) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public ArrayList<Reserva> getById(int idPers) throws Exception {
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<Reserva> revs= new ArrayList<Reserva>();
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva where idPersona=?");
+			stmt.setInt(1, idPers);
+			rs=stmt.executeQuery();
+			if(rs!=null){
+				while(rs.next()){
+					Reserva r=new Reserva();
+					
+					r.setId(rs.getInt("idP"));
+					r.setDetalle(rs.getString("detalle"));
+					revs.add(r);
+				}
+			}
+		} catch (SQLException e) {
+			
+			throw e;
+		} catch (AppDataException ade){
+			throw ade;
+		}
+		
+
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return revs;
 	}
 
 	public void delete(Reserva r) {

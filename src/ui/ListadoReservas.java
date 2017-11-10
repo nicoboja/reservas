@@ -29,13 +29,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import org.jdesktop.beansbinding.ObjectProperty;
+import javax.swing.JLabel;
 
 public class ListadoReservas extends JInternalFrame {
 	
 	private ArrayList<Reserva> res;
 	CtrlABMReserva ctrl= new CtrlABMReserva();
-	private JTable table;
-
+	public int idPersona;
 	/**
 	 * Create the frame.
 	 */
@@ -49,8 +49,8 @@ public class ListadoReservas extends JInternalFrame {
 		scrollPane.setBounds(0, 0, 483, 254);
 		getContentPane().add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		JLabel lblId = new JLabel("");
+		scrollPane.setColumnHeaderView(lblId);
 		
 		try{
 			this.res=ctrl.getAll();
@@ -61,11 +61,9 @@ public class ListadoReservas extends JInternalFrame {
 		initDataBindings();
 	}
 	protected void initDataBindings() {
-		JTableBinding<Reserva, ArrayList<Reserva>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, res, table);
-		//
-		BeanProperty<Reserva, Integer> reservaBeanProperty = BeanProperty.create("cantHoras");
-		jTableBinding.addColumnBinding(reservaBeanProperty).setColumnName("New Column");
-		//
-		jTableBinding.bind();
 	}
+	
+	public void setId(int id){
+		idPersona = id;
+	};
 }

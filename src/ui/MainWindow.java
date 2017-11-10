@@ -161,5 +161,6 @@ public class MainWindow {
 		ListadoReservas pd= new ListadoReservas();
 		desktopPane.add(pd);
 		pd.setVisible(true);
+		pd.setId(idPersona);
 	}
 }

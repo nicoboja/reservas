@@ -25,6 +25,9 @@ public class CtrlABMReserva {
 	public Reserva getById(Reserva r) throws Exception{
 		return this.dataRes.getById(r);		
 	}
+	public Reserva getById(int r) throws Exception{
+		return this.dataRes.getById(r);		
+	}
 	
 	public void delete(Reserva r) throws Exception{
 		dataRes.delete(r);
