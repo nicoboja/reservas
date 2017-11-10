@@ -120,9 +120,9 @@ public class Log extends JDialog {
 		
 		System.out.println(rta);
 
-		
-		
-	
+	}
+	public int getId(){
+		return this.mapearDeForm().getId();
 	}
 	
 	private Persona mapearDeForm(){

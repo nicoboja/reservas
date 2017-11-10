@@ -13,7 +13,7 @@ import java.awt.BorderLayout;
 
 
 public class MainWindow {
-
+	private int idPersona;
 	private JFrame frame;
 	private JDesktopPane desktopPane;
 
@@ -24,9 +24,6 @@ public class MainWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					
-					
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
 				
@@ -52,7 +49,8 @@ public class MainWindow {
 		Log login = new Log();
 		login.setVisible(true);
 		login.setAlwaysOnTop(true);
-		
+		idPersona = login.getId();
+		System.out.println(idPersona);
 		//
 		
 		frame = new JFrame();
@@ -76,7 +74,7 @@ public class MainWindow {
 		JMenuItem mntmListadoPersonas = new JMenuItem("Listado Personas");
 		mntmListadoPersonas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mnuListaoPersonaClick();
+				mnuListadoPersonaClick();
 				
 			}
 		});
@@ -116,7 +114,7 @@ public class MainWindow {
 		JMenuItem mntmReservasPendientes = new JMenuItem("Reservas Pendientes");
 		mntmReservasPendientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				mnuReservasPendClick();	
+				mnuListadoReservasClick();
 			}
 		});
 		mnReservacs.add(mntmReservasPendientes);
@@ -131,16 +129,12 @@ public class MainWindow {
 
 		ABMCReservaDesktop pd= new ABMCReservaDesktop();
 		desktopPane.add(pd);
+		
 		pd.setVisible(true);
 		
 	}
 	
-//	protected void mnuReservasPendClick() {
-//		ReservasPend pd= new ReservasPend();
-//		desktopPane.add(pd);
-//		pd.setVisible(true);
-//
-//	}
+
 
 	protected void mnuABMCPersonaClick() {
 		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
@@ -158,8 +152,13 @@ public class MainWindow {
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}
-	protected void mnuListaoPersonaClick(){
+	protected void mnuListadoPersonaClick(){
 		ListadoPersonas pd= new ListadoPersonas();
+		desktopPane.add(pd);
+		pd.setVisible(true);
+	}
+	protected void mnuListadoReservasClick(){
+		ListadoReservas pd= new ListadoReservas();
 		desktopPane.add(pd);
 		pd.setVisible(true);
 	}

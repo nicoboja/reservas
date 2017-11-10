@@ -12,7 +12,18 @@ public class Reserva {
 	private Persona per;
 	private int CantHoras;
 	
+	public Reserva(){};
 	
+	public Reserva(int id, Date fecha, Time hora, String detalle, Elemento elem, Persona per, int cantHoras) {
+		super();
+		this.id = id;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.detalle = detalle;
+		this.elem = elem;
+		this.per = per;
+		CantHoras = cantHoras;
+	}
 	public int getCantHoras() {
 		return CantHoras;
 	}

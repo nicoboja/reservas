@@ -10,8 +10,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 
-import controlers.CtrlABMPersona;
-import entity.Persona;
+
+import controlers.CtrlABMReserva;
+
+import entity.Reserva;
 
 import java.awt.Color;
 import org.jdesktop.swingbinding.JTableBinding;
@@ -25,12 +27,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import org.jdesktop.beansbinding.ObjectProperty;
 
 public class ListadoReservas extends JInternalFrame {
 	
-	private ArrayList<Persona> pers;
-	CtrlABMPersona ctrl= new CtrlABMPersona();
-	
+	private ArrayList<Reserva> res;
+	CtrlABMReserva ctrl= new CtrlABMReserva();
 	private JTable table;
 
 	/**
@@ -40,96 +43,29 @@ public class ListadoReservas extends JInternalFrame {
 	
 		setClosable(true);
 		setBounds(100, 100, 507, 300);
+		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnEditar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				btnEditarClick();
-				
-			}
-		});
-		
-		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				initDataBindings();
-			}
-		});
-		btnActualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-			}
-		});
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(94)
-					.addComponent(btnActualizar)
-					.addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
-					.addComponent(btnEditar)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEditar)
-						.addComponent(btnActualizar))
-					.addContainerGap(14, Short.MAX_VALUE))
-		);
+		scrollPane.setBounds(0, 0, 483, 254);
+		getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setBackground(Color.LIGHT_GRAY);
-		getContentPane().setLayout(groupLayout);
 		
 		try{
-			this.pers=ctrl.getAll();
+			this.res=ctrl.getAll();
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 	
 		}
 		initDataBindings();
 	}
-	protected void btnEditarClick() {
-		int indexPersona=table.convertRowIndexToModel(table.getSelectedRow());
-		
-		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
-		pd.showPersona(this.pers.get(indexPersona));
-		
-		this.getDesktopPane().add(pd);
-		pd.setVisible(true);
-		
-	}
 	protected void initDataBindings() {
-		JTableBinding<Persona, List<Persona>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, pers, table);
+		JTableBinding<Reserva, ArrayList<Reserva>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, res, table);
 		//
-		BeanProperty<Persona, String> personaBeanProperty = BeanProperty.create("nombre");
-		jTableBinding.addColumnBinding(personaBeanProperty).setColumnName("Nombre").setEditable(false);
+		BeanProperty<Reserva, Integer> reservaBeanProperty = BeanProperty.create("cantHoras");
+		jTableBinding.addColumnBinding(reservaBeanProperty).setColumnName("New Column");
 		//
-		BeanProperty<Persona, String> personaBeanProperty_1 = BeanProperty.create("apellido");
-		jTableBinding.addColumnBinding(personaBeanProperty_1).setColumnName("Apellido").setEditable(false);
-		//
-		BeanProperty<Persona, String> personaBeanProperty_2 = BeanProperty.create("dni");
-		jTableBinding.addColumnBinding(personaBeanProperty_2).setColumnName("DNI").setEditable(false);
-		//
-		BeanProperty<Persona, String> personaBeanProperty_3 = BeanProperty.create("categoria.descripcion");
-		jTableBinding.addColumnBinding(personaBeanProperty_3).setColumnName("Categoria").setEditable(false);
-		//
-		jTableBinding.setEditable(false);
 		jTableBinding.bind();
 	}
 }

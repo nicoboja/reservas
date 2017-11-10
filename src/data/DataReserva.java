@@ -23,7 +23,7 @@ public class DataReserva {
 		
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select * from reservado");
+			rs = stmt.executeQuery("select * from reserva ");
 			if(rs!=null){
 				while(rs.next()){
 					Reserva r=new Reserva();
@@ -62,7 +62,7 @@ public class DataReserva {
 		try {
 			stmt = FactoryConexion.getInstancia()
 					.getConn().createStatement();
-			rs = stmt.executeQuery("select * from reservado");
+			rs = stmt.executeQuery("select * from reserva");
 			if(rs!=null){
 				while(rs.next()){
 					Reserva r=new Reserva();
@@ -114,6 +114,7 @@ public class DataReserva {
 			throw ex;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
+			
 		}			
 	}
 

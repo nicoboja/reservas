@@ -8,7 +8,7 @@ import entity.Categoria;
 import entity.Persona;
 
 public class CtrlABMPersona {
-	public int idPer = -1;
+	static int idPer = -1;
 
 	private DataPersona dataPer;
 	private DataCategoria dataCat;
