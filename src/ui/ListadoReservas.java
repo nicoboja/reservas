@@ -57,8 +57,20 @@ public class ListadoReservas extends JInternalFrame {
 	protected void initDataBindings() {
 		JTableBinding<Reserva, List<Reserva>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, res, table);
 		//
-		BeanProperty<Reserva, Integer> reservaBeanProperty = BeanProperty.create("detalle");
-		jTableBinding.addColumnBinding(reservaBeanProperty).setColumnName("Detalle").setEditable(false);
+		BeanProperty<Reserva, Integer> reservaBeanProperty1 = BeanProperty.create("id");
+		jTableBinding.addColumnBinding(reservaBeanProperty1).setColumnName("ID").setEditable(false);
+		//
+		BeanProperty<Reserva, Integer> reservaBeanProperty2 = BeanProperty.create("fecha");
+		jTableBinding.addColumnBinding(reservaBeanProperty2).setColumnName("Fecha").setEditable(false);
+		//
+		BeanProperty<Reserva, Integer> reservaBeanProperty3 = BeanProperty.create("detalle");
+		jTableBinding.addColumnBinding(reservaBeanProperty3).setColumnName("Detalle").setEditable(false);
+		//
+		BeanProperty<Reserva, Integer> reservaBeanProperty4 = BeanProperty.create("hora");
+		jTableBinding.addColumnBinding(reservaBeanProperty4).setColumnName("Hora").setEditable(false);
+		//
+		BeanProperty<Reserva, Integer> reservaBeanProperty5 = BeanProperty.create("cantHoras");
+		jTableBinding.addColumnBinding(reservaBeanProperty5).setColumnName("Cantidad Hs.").setEditable(false);
 		//
 		jTableBinding.setEditable(false);
 		jTableBinding.bind();

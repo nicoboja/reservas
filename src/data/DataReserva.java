@@ -50,7 +50,7 @@ public class DataReserva {
 		Reserva r=null;
 		ArrayList<Reserva> revs= new ArrayList<Reserva>();
 		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva r inner join elemento e on r.idElemento = e.idE where idPersona=? ");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva r inner join elemento e on r.idElemento = e.idE where idPersona=? and r.fecha >= CURDATE(); ");
 			stmt.setInt(1, idPers);
 			rs=stmt.executeQuery();
 			if(rs!=null){
