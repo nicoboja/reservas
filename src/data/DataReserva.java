@@ -44,8 +44,10 @@ public class DataReserva {
 		return null;
 	}
 	public ArrayList<Reserva> getById(int idPers) throws Exception {
+		System.out.println("dataReserva!");
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
+		Reserva r=null;
 		ArrayList<Reserva> revs= new ArrayList<Reserva>();
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva r inner join elemento e on r.idElemento = e.idE where idPersona=? ");
@@ -53,33 +55,30 @@ public class DataReserva {
 			rs=stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){
-					Reserva r=new Reserva();
+					
+					r=new Reserva();
 					r.setId(rs.getInt("idR"));
 					r.setFecha(rs.getDate("fecha"));
 					r.setDetalle(rs.getString("detalle"));
 					r.setCantHoras(rs.getInt("cantHoras"));
-					r.getElem().setNombre(rs.getString("nombre"));
-					r.getElem().setDescrip(rs.getString("descrip"));
+//					r.getElem().setNombre(rs.getString("nombre"));
+//					r.getElem().setDescrip(rs.getString("descrip"));
 					revs.add(r);
 				}
 			}
-		} catch (SQLException e) {
-			
-			throw e;
-		} catch (AppDataException ade){
-			throw ade;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
 		}
 		
-
-		try {
-			if(rs!=null) rs.close();
-			if(stmt!=null) stmt.close();
-			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		System.out.println(revs.get(0).getDetalle());
+		System.out.println("DATA  "+revs.get(0).getDetalle());
 		return revs;
 	}
 
