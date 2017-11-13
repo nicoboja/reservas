@@ -10,11 +10,12 @@ public class Reserva {
 	private String detalle;
 	private Elemento elem;
 	private Persona per;
-	private int CantHoras;
+	private int cantHoras;
+	private String estado = "Pendiente";
 	
 	public Reserva(){};
 	
-	public Reserva(int id, Date fecha, Time hora, String detalle, Elemento elem, Persona per, int cantHoras) {
+	public Reserva(int id, Date fecha, Time hora, String detalle, Elemento elem, Persona per, int cantHoras, String estado) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -22,13 +23,23 @@ public class Reserva {
 		this.detalle = detalle;
 		this.elem = elem;
 		this.per = per;
-		CantHoras = cantHoras;
+		this.cantHoras = cantHoras;
+		this.estado = estado;
 	}
+	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public int getCantHoras() {
-		return CantHoras;
+		return cantHoras;
 	}
 	public void setCantHoras(int cantHoras) {
-		CantHoras = cantHoras;
+		cantHoras = cantHoras;
 	}
 	public Date getFecha() {
 		return fecha;

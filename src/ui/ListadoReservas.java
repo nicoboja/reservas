@@ -18,6 +18,7 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+import javax.swing.JButton;
 
 public class ListadoReservas extends JInternalFrame {
 	
@@ -31,17 +32,22 @@ public class ListadoReservas extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ListadoReservas(int per) {
+		setTitle("Listado de Reservas Futuras");
 		idPersona = per;
 		setClosable(true);
-		setBounds(100, 100, 507, 300);
+		setBounds(100, 100, 723, 405);
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 483, 254);
+		scrollPane.setBounds(0, 0, 693, 298);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(576, 324, 117, 29);
+		getContentPane().add(btnCancelar);
 		System.out.println("ID: "+idPersona);
 		try{
 			

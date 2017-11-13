@@ -16,7 +16,7 @@ public class DataReserva {
 	
 	public void add(Reserva r) throws Exception {
 		PreparedStatement stmt=null;
-		ResultSet keyResultSet=null;
+
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
@@ -55,10 +55,10 @@ public class DataReserva {
 			rs=stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){
-					
 					r=new Reserva();
 					r.setId(rs.getInt("idR"));
 					r.setFecha(rs.getDate("fecha"));
+					r.setHora(rs.getTime("hora"));
 					r.setDetalle(rs.getString("detalle"));
 					r.setCantHoras(rs.getInt("cantHoras"));
 //					r.getElem().setNombre(rs.getString("nombre"));
@@ -78,7 +78,6 @@ public class DataReserva {
 			}
 		}
 		
-		System.out.println("DATA  "+revs.get(0).getDetalle());
 		return revs;
 	}
 
