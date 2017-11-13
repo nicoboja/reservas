@@ -14,87 +14,6 @@ import util.AppDataException;
 
 public class DataReserva {
 	
-
-	public ArrayList<Reserva> getAll() throws Exception{
-		
-		Statement stmt=null;
-		ResultSet rs=null;
-		
-		ArrayList<Reserva> reserv= new ArrayList<Reserva>();
-		
-		try {
-			stmt = FactoryConexion.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select * from reserva ");
-			if(rs!=null){
-				while(rs.next()){
-					Reserva r=new Reserva();
-					r.setId(rs.getInt("idR"));
-
-					reserv.add(r);
-				}
-			}
-		} catch (SQLException e) {
-			
-			throw e;
-		} catch (AppDataException ade){
-			throw ade;
-		}
-		
-
-		try {
-			if(rs!=null) rs.close();
-			if(stmt!=null) stmt.close();
-			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return reserv;
-		
-
-	}
-	public ArrayList<Reserva> getAllPendientes() throws Exception{
-		
-		Statement stmt=null;
-		ResultSet rs=null;
-		ArrayList<Reserva> reserv= new ArrayList<Reserva>();
-		
-		try {
-			stmt = FactoryConexion.getInstancia()
-					.getConn().createStatement();
-			rs = stmt.executeQuery("select * from reserva");
-			if(rs!=null){
-				while(rs.next()){
-					Reserva r=new Reserva();
-					r.setId(rs.getInt("idR"));
-			
-					reserv.add(r);
-				}
-			}
-		} catch (SQLException e) {
-			
-			throw e;
-		} catch (AppDataException ade){
-			throw ade;
-		}
-		
-
-		try {
-			if(rs!=null) rs.close();
-			if(stmt!=null) stmt.close();
-			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return reserv;
-		
-	}
-
-
-
 	public void add(Reserva r) throws Exception {
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
@@ -129,15 +48,18 @@ public class DataReserva {
 		ResultSet rs=null;
 		ArrayList<Reserva> revs= new ArrayList<Reserva>();
 		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva where idPersona=?");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva r inner join elemento e on r.idElemento = e.idE where idPersona=? ");
 			stmt.setInt(1, idPers);
 			rs=stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){
 					Reserva r=new Reserva();
-					
-					r.setId(rs.getInt("idP"));
+					r.setId(rs.getInt("idR"));
+					r.setFecha(rs.getDate("fecha"));
 					r.setDetalle(rs.getString("detalle"));
+					r.setCantHoras(rs.getInt("cantHoras"));
+					r.getElem().setNombre(rs.getString("nombre"));
+					r.getElem().setDescrip(rs.getString("descrip"));
 					revs.add(r);
 				}
 			}
@@ -157,7 +79,7 @@ public class DataReserva {
 			
 			e.printStackTrace();
 		}
-		
+		System.out.println(revs.get(0).getDetalle());
 		return revs;
 	}
 

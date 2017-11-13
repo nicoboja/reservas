@@ -16,6 +16,8 @@ import entity.TipoElemento;
 
 import java.awt.Window.Type;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -109,21 +111,27 @@ public class Log extends JDialog {
 		
 	}
 	private void logueo(){
-		Boolean rta = false;
+		
+		int idPers = -1;
 		try {
-			rta = ctrl.logueo(this.mapearDeForm());
-			this.setVisible(false);
+			//idPers = ctrl.logueo(this.mapearDeForm());
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(idPers!=-1){
+			this.setVisible(false);
+			
+			
+		}else{
+			JOptionPane.showMessageDialog(this, "Error en Usuario o Contraseña ");
+		}
 		
-		System.out.println(rta);
+		
 
 	}
-	public int getId(){
-		return this.mapearDeForm().getId();
-	}
+
 	
 	private Persona mapearDeForm(){
 		Persona p=new Persona();

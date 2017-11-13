@@ -8,7 +8,7 @@ import entity.Categoria;
 import entity.Persona;
 
 public class CtrlABMPersona {
-	static int idPer = -1;
+
 
 	private DataPersona dataPer;
 	private DataCategoria dataCat;
@@ -29,28 +29,26 @@ public class CtrlABMPersona {
 		dataPer.remove(p);		
 	}
 	
-	public Boolean logueo(Persona p) throws Exception{
-		Boolean rta = false;
+	public int logueo(Persona p) throws Exception{
+		int rta = -1;
 		Persona pdata = new Persona();
 		pdata = this.getByUss(p);
-		System.out.println(pdata.getUss()+" "+pdata.getPass()+" de BD");
+		
+	/*	System.out.println(pdata.getUss()+" "+pdata.getPass()+" de BD");
 		System.out.println(p.getUss()+" "+p.getPass()+" de mapeo");
+		*/
 		if(pdata.equalsUss(p)){
-			rta = true;
+			rta = pdata.getId();
 			System.out.println("VERDADERO");
 			
-			idPer = pdata.getId();
+		
 		}
 		
 		return rta;
 		
 		
 	}
-	public int getIdP(){
-		return idPer;
-	}
-	
-	
+
 	
 	public Persona getByUss(Persona p) throws Exception{
 		return dataPer.getByUss(p);

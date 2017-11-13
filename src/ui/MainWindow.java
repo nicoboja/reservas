@@ -6,17 +6,40 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import controlers.CtrlABMPersona;
+import entity.Persona;
+
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class MainWindow {
-	private int idPersona;
+	public int idPersona;
+	private CtrlABMPersona ctrl=new CtrlABMPersona();
+	
 	private JFrame frame;
 	private JDesktopPane desktopPane;
-
+	private JTextField txtUsuario;
+	private JPasswordField passField;
+	
+	
+	JPanel panelLog = new JPanel();
+	JMenu mnuPersona = new JMenu("Persona");
+	JMenu mnElementos = new JMenu("Elementos");
+	JMenu mnReservas = new JMenu("Reservas");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,6 +61,7 @@ public class MainWindow {
 	 * Create the application.
 	 */
 	public MainWindow() {
+		
 		initialize();
 	}
 
@@ -45,14 +69,6 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//
-		Log login = new Log();
-		login.setVisible(true);
-		login.setAlwaysOnTop(true);
-		idPersona = login.getId();
-		System.out.println(idPersona);
-		//
-		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 678, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +76,8 @@ public class MainWindow {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnuPersona = new JMenu("Persona");
+		
+		mnuPersona.setEnabled(false);
 		menuBar.add(mnuPersona);
 		
 		JMenuItem mnuGestionarPersonas = new JMenuItem("Gestionar Personas");
@@ -80,7 +97,7 @@ public class MainWindow {
 		});
 		mnuPersona.add(mntmListadoPersonas);
 		
-		JMenu mnElementos = new JMenu("Elementos");
+		mnElementos.setEnabled(false);
 		menuBar.add(mnElementos);
 		
 		JMenuItem mntmGestionarElementos = new JMenuItem("Gestionar Elementos");
@@ -100,8 +117,8 @@ public class MainWindow {
 		});
 		mnElementos.add(mntmTiposElementos);
 		
-		JMenu mnReservacs = new JMenu("Reservas");
-		menuBar.add(mnReservacs);
+		mnReservas.setEnabled(false);
+		menuBar.add(mnReservas);
 		
 		JMenuItem mntmGestionarReservas = new JMenuItem("Nueva Reserva");
 		mntmGestionarReservas.addActionListener(new ActionListener() {
@@ -109,7 +126,8 @@ public class MainWindow {
 				mnuGestionarReservasClicked();
 			}
 		});
-		mnReservacs.add(mntmGestionarReservas);
+		
+		mnReservas.add(mntmGestionarReservas);
 		
 		JMenuItem mntmReservasPendientes = new JMenuItem("Reservas Pendientes");
 		mntmReservasPendientes.addActionListener(new ActionListener() {
@@ -117,25 +135,68 @@ public class MainWindow {
 				mnuListadoReservasClick();
 			}
 		});
-		mnReservacs.add(mntmReservasPendientes);
+		
+		mnReservas.add(mntmReservasPendientes);
 		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
 		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		
+		panelLog.setBounds(121, 76, 423, 187);
+		desktopPane.add(panelLog);
+		panelLog.setLayout(null);
+		
+		JLabel lblIngresarAlSistema = new JLabel("Ingresar al Sistema");
+		lblIngresarAlSistema.setBounds(152, 5, 119, 16);
+		panelLog.add(lblIngresarAlSistema);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(113, 55, 219, 26);
+		panelLog.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		passField = new JPasswordField();
+		passField.setBounds(113, 93, 219, 26);
+		panelLog.add(passField);
+		
+		JLabel lblUsuario = new JLabel("Usuario");
+		lblUsuario.setBounds(27, 60, 61, 16);
+		panelLog.add(lblUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contraseña");
+		lblContrasea.setBounds(27, 98, 95, 16);
+		panelLog.add(lblContrasea);
+		
+		JButton btnIngresar = new JButton("Ingresar");
+		btnIngresar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					log();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnIngresar.setBounds(215, 135, 117, 29);
+		panelLog.add(btnIngresar);
+		
 	}
 
 	protected void mnuGestionarReservasClicked() {
-
 		ABMCReservaDesktop pd= new ABMCReservaDesktop();
 		desktopPane.add(pd);
-		
 		pd.setVisible(true);
 		
 	}
 	
-
-
 	protected void mnuABMCPersonaClick() {
 		ABMCPersonaDesktop pd= new ABMCPersonaDesktop();
 		desktopPane.add(pd);
@@ -158,9 +219,40 @@ public class MainWindow {
 		pd.setVisible(true);
 	}
 	protected void mnuListadoReservasClick(){
-		ListadoReservas pd= new ListadoReservas();
+		ListadoReservas pd= new ListadoReservas(idPersona);
 		desktopPane.add(pd);
 		pd.setVisible(true);
-		pd.setId(idPersona);
+	}
+	protected void log() throws Exception {
+		try {
+			idPersona = ctrl.logueo(this.mapearDeForm());
+			System.out.println(idPersona);
+			if(idPersona!=-1){
+				mnuPersona.setEnabled(true);
+				mnReservas.setEnabled(true);
+				mnElementos.setEnabled(true);
+				panelLog.setVisible(false);
+				
+			}else{
+				JOptionPane.showInternalMessageDialog(desktopPane, this, "Error en Usuario o Contraseña ", idPersona);
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showInternalMessageDialog(desktopPane, this, "Error en Usuario o Contraseña ", idPersona);
+		}
+		 
+	}
+	
+	private Persona mapearDeForm(){
+		Persona p=new Persona();
+		if(!this.txtUsuario.getText().isEmpty()){
+		p.setUss(this.txtUsuario.getText());
+		//System.out.println(p.getUss()+"mapeo");
+		}
+		if(!this.passField.getText().isEmpty()){
+			p.setPass(this.passField.getText());
+			//System.out.println(p.getPass()+"mapeo");
+		}
+		return p;
 	}
 }

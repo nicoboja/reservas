@@ -18,15 +18,13 @@ public class CtrlABMReserva {
 		dataRes.add(r);
 	}
 	
-	public ArrayList<Reserva> getAll()throws Exception{
-		return dataRes.getAll();
-	}
-	
+
 	public Reserva getById(Reserva r) throws Exception{
 		return this.dataRes.getById(r);		
 	}
-	public Reserva getById(int r) throws Exception{
-		return this.dataRes.getById(r);		
+	
+	public ArrayList<Reserva> getById(int idP) throws Exception{
+		return this.dataRes.getById(idP);		
 	}
 	
 	public void delete(Reserva r) throws Exception{
