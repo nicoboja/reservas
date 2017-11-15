@@ -33,8 +33,7 @@ public class MainWindow {
 	private JDesktopPane desktopPane;
 	private JTextField txtUsuario;
 	private JPasswordField passField;
-	
-	
+		
 	JPanel panelLog = new JPanel();
 	JMenu mnuPersona = new JMenu("Persona");
 	JMenu mnElementos = new JMenu("Elementos");
@@ -43,6 +42,7 @@ public class MainWindow {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

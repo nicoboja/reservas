@@ -10,6 +10,7 @@ public class Reserva {
 	private String detalle;
 	private Elemento elem;
 	private Persona per;
+	private String estado="Pendiente";
 	private int CantHoras;
 	
 	public Reserva(){};
@@ -67,6 +68,13 @@ public class Reserva {
 	public void setPer(Persona per) {
 		this.per = per;
 	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,5 +96,4 @@ public class Reserva {
 		return true;
 	}
 
-	
 }

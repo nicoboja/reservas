@@ -5,7 +5,6 @@ public class Elemento {
 
 	private int id;
 	private String nombre;
-	private String descrip;
 	private TipoElemento tipo;
 	
 	public TipoElemento getTipoElem() {
@@ -26,20 +25,9 @@ public class Elemento {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescrip() {
-		return descrip;
-	}
-	public void setDescrip(String descrip) {
-		this.descrip = descrip;
-	}
-	
-
 	
 	public Elemento(){}
 	
-
-	
-
 	@Override
 	public int hashCode() {
 		return Integer.hashCode(this.id);
@@ -49,10 +37,10 @@ public class Elemento {
 	public boolean equals(Object obj) {
 		return ((obj instanceof Elemento) &&((Elemento)obj).getId()==this.id);
 	}
+	
 	@Override
 	public String toString() {
 		return String.valueOf(id) + nombre;
 	}	
-
 	
 }

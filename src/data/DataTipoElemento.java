@@ -23,8 +23,9 @@ public class DataTipoElemento {
 			if(rs!=null && rs.next()){
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
-					tipoElem.setCantMax(rs.getInt("tmax"));
+					tipoElem.setCantMax(rs.getInt("maxPend"));
 					tipoElem.setDiasMaxAnt(rs.getInt("diasant"));
+					tipoElem.setTiempoMax(rs.getInt("tiempoMax"));
 			}			
 		} catch (Exception e1) {
 			throw e1;
@@ -45,10 +46,11 @@ public class DataTipoElemento {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into tipoelemento (descripcion, tmax, diasant) values (?,?,?)");
+					"insert into tipoelemento (descripcion, maxPend, diasant, tiempoMax) values (?,?,?,?)");
 			stmt.setString(1, te.getDescripcion());
 			stmt.setInt(2, te.getCantMax());
 			stmt.setInt(3, te.getDiasMaxAnt());
+			stmt.setInt(4, te.getTiempoMax());
 			stmt.executeUpdate();
 		}catch (Exception ex){
 			System.out.println("No se ha cargado el tipo elemento");
@@ -62,11 +64,12 @@ public class DataTipoElemento {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update tipoelemento set descripcion=?,  diasant=?, tmax=? where idT=?");
+					"update tipoelemento set descripcion=?,  diasant=?, maxPend=?, tiempoMax=? where idT=?");
 			stmt.setString(1, te.getDescripcion());
 			stmt.setInt(2, te.getDiasMaxAnt());
 			stmt.setInt(3, te.getCantMax());
-			stmt.setInt(4, te.getIdT());
+			stmt.setInt(4, te.getTiempoMax());
+			stmt.setInt(5, te.getIdT());
 			stmt.executeUpdate();					
 		}catch (Exception ex) {
 			System.out.println("Ha fallado la modificacion de datos");
@@ -104,8 +107,9 @@ public class DataTipoElemento {
 					TipoElemento tipoElem=new TipoElemento();
 					tipoElem.setIdT(rs.getInt("idT"));
 					tipoElem.setDescripcion(rs.getString("descripcion"));
-					tipoElem.setCantMax(rs.getInt("tmax"));
+					tipoElem.setCantMax(rs.getInt("maxPend"));
 					tipoElem.setDiasMaxAnt(rs.getInt("diasant"));
+					tipoElem.setTiempoMax(rs.getInt("tiempoMax"));
 					tipoelementos.add(tipoElem);
 				}
 			}

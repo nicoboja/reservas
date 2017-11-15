@@ -36,7 +36,6 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	
 	private JPanel contentPane;
 	private JTextField txtElemento;
-	private JTextField txtDescripcion;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnModificar;
@@ -72,17 +71,15 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblElemento = new JLabel("Elemento");
-		
-		JLabel lblDescripcion = new JLabel("Descripcion");
+		JLabel lblElemento = new JLabel("Nombre");
+		lblElemento.setBounds(25, 85, 81, 14);
 		
 		txtElemento = new JTextField();
+		txtElemento.setBounds(119, 82, 163, 20);
 		txtElemento.setColumns(10);
 		
-		txtDescripcion = new JTextField();
-		txtDescripcion.setColumns(10);
-		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(187, 16, 95, 37);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -95,6 +92,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		});
 		
 		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBounds(35, 222, 85, 23);
 		btnAgregar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -103,6 +101,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		});
 		
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(137, 222, 83, 23);
 		btnBorrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -111,6 +110,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		});
 		
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBounds(230, 222, 85, 23);
 		btnModificar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -119,77 +119,29 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		});
 		
 		JLabel lblId = new JLabel("ID");
+		lblId.setBounds(25, 27, 11, 14);
 		
 		txtId = new JTextField();
+		txtId.setBounds(40, 24, 86, 20);
 		txtId.setEditable(false);
 		txtId.setColumns(10);
 		
 		JLabel lblTipoElemento = new JLabel("Tipo Elemento");
+		lblTipoElemento.setBounds(25, 140, 95, 14);
 		
 		cboTipo = new JComboBox();
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnAgregar)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(10)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblId)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(txtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-									.addComponent(btnBuscar, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(101)
-									.addComponent(btnBorrar)
-									.addGap(18)
-									.addComponent(btnModificar))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblTipoElemento)
-										.addComponent(lblDescripcion)
-										.addComponent(lblElemento))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(txtElemento, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-											.addComponent(txtDescripcion, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-										.addComponent(cboTipo, 0, 237, Short.MAX_VALUE))))
-							.addGap(205)))
-					.addGap(128))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblId)
-						.addComponent(txtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBuscar, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblElemento)
-						.addComponent(txtElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDescripcion)
-						.addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblTipoElemento)
-						.addComponent(cboTipo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAgregar)
-						.addComponent(btnBorrar)
-						.addComponent(btnModificar))
-					.addGap(28))
-		);
-		contentPane.setLayout(gl_contentPane);
+		cboTipo.setBounds(119, 137, 163, 20);
+		contentPane.setLayout(null);
+		contentPane.add(btnAgregar);
+		contentPane.add(lblId);
+		contentPane.add(txtId);
+		contentPane.add(btnBuscar);
+		contentPane.add(btnBorrar);
+		contentPane.add(btnModificar);
+		contentPane.add(lblTipoElemento);
+		contentPane.add(lblElemento);
+		contentPane.add(cboTipo);
+		contentPane.add(txtElemento);
 		cargarListas();
 	}
 
@@ -215,7 +167,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		Elemento e = this.mapearDeForm();
 		try{
 			ctrl.add(e);
-			JOptionPane.showMessageDialog(this, " Se cargo el elemento: "+ e.getDescrip());
+			JOptionPane.showMessageDialog(this, " Se cargo el elemento: "+ e.getNombre());
 			this.limpiarForm();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -245,7 +197,6 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	
 	private void mapearAForm(Elemento e){
 		this.txtElemento.setText(e.getNombre());
-		this.txtDescripcion.setText(e.getDescrip());
 		this.txtId.setText(String.valueOf(e.getId()));
 		this.cboTipo.setSelectedItem(e.getTipoElem());
 		
@@ -256,10 +207,9 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		
 		if(!this.txtId.getText().isEmpty()){
 			e.setId(Integer.parseInt(this.txtId.getText()));
-		}
-		
+		}		
 		e.setNombre(this.txtElemento.getText());
-		e.setDescrip(this.txtDescripcion.getText());
+
 		
 		if (cboTipo.getSelectedIndex() != -1){
 			e.setTipoElem((TipoElemento)this.cboTipo.getSelectedItem());
@@ -273,7 +223,6 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	
 	private void limpiarForm(){
 		txtId.setText(null);
-		txtDescripcion.setText(null);
 		txtElemento.setText(null);
 		cboTipo.setSelectedIndex(-1);
 	}

@@ -6,6 +6,7 @@ import data.DataElemento;
 import data.DataReserva;
 import data.DataTipoElemento;
 import entity.Elemento;
+import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
 
@@ -15,7 +16,19 @@ public class CtrlABMReserva {
 	private DataElemento dataElem=new DataElemento();
 	
 	public void add(Reserva r) throws Exception{
-		dataRes.add(r);
+		ArrayList<Reserva> res=new ArrayList <Reserva>();
+		int cant=0;
+		res=getById(r.getPer().getId());
+		for (int i=0; i < res.size(); i++){
+			if(res.get(i).getElem().getTipoElem().getIdT()==r.getElem().getTipoElem().getIdT()
+					&& res.get(i).getEstado()=="Pendiente"){
+				cant=cant++;
+			}			
+		}
+		if(cant<r.getElem().getTipoElem().getCantMax() &&
+				r.getElem().getTipoElem().getTiempoMax()<=r.getCantHoras()){
+			dataRes.add(r);			
+		}			
 	}
 	
 
@@ -33,6 +46,9 @@ public class CtrlABMReserva {
 	
 	public ArrayList<TipoElemento> getTipos() throws Exception{
 		return dataTipo.getAll();
+	}
+	public TipoElemento getTipo(int idE) throws Exception{
+		return dataElem.getTipo();
 	}
 	public void update(Reserva r)throws Exception{
 		dataRes.update(r);

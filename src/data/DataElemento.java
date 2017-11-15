@@ -14,10 +14,9 @@ public class DataElemento {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into elemento (idT, nombre, descripcion) values (?,?,?)");
+					"insert into elemento (idT, nombre) values (?,?)");
 			stmt.setInt(1, e.getTipoElem().getIdT());
 			stmt.setString(2, e.getNombre());
-			stmt.setString(3, e.getDescrip());
 			stmt.executeUpdate();			
 			
 		}catch (Exception e1){
@@ -51,7 +50,7 @@ public class DataElemento {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select e.idE, e.`nombre`, e.`descripcion`, t.idT, t.descripcion from elemento e inner join tipoelemento t  on e.`idT` = t.idT where nombre=?");
+					"select e.idE, e.`nombre`, t.idT, t.descripcion from elemento e inner join tipoelemento t  on e.`idT` = t.idT where nombre=?");
 			stmt.setString(1, e.getNombre());
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()){
@@ -60,10 +59,8 @@ public class DataElemento {
 					
 					elem.setId(rs.getInt("idE"));
 					elem.setNombre(rs.getString("nombre"));
-					elem.setDescrip(rs.getString("descripcion"));
 					elem.getTipoElem().setDescripcion(rs.getString("descripcion"));
-					elem.getTipoElem().setIdT(rs.getInt("idT"));
-				
+					elem.getTipoElem().setIdT(rs.getInt("idT"));			
 					
 			}
 			
@@ -94,7 +91,6 @@ public class DataElemento {
 					Elemento elem=new Elemento();
 					elem.setId(rs.getInt("idE"));
 					elem.setNombre(rs.getString("nombre"));
-					elem.setDescrip(rs.getString("descripcion"));
 					elementos.add(elem);
 				}
 			}
@@ -118,9 +114,8 @@ public class DataElemento {
 		PreparedStatement stmt=null;
 		try{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update elemento set nombre=?, descripcion=?, idT=? where idE=?;");
+					"update elemento set nombre=?, idT=? where idE=?;");
 			stmt.setString(1, e.getNombre());
-			stmt.setString(2, e.getDescrip());
 			stmt.setInt(3, e.getTipoElem().getIdT());
 			stmt.setInt(4, e.getId());
 			stmt.executeUpdate();		
@@ -131,5 +126,10 @@ public class DataElemento {
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}		
+	}
+
+	public TipoElemento getTipo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

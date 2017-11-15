@@ -20,13 +20,14 @@ public class DataReserva {
 		try{
 			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into reserva (fecha, detalle, idElemento, hora, cantHoras, idPersona) values (?,?,?,?,?,?)");
+					"insert into reserva (fecha, detalle, idElemento, hora, cantHoras, idPersona, estado) values (?,?,?,?,?,?,?)");
 			stmt.setDate(1, r.getFecha());
 			stmt.setString(2, r.getDetalle());
 			stmt.setInt(3, r.getElem().getId());
 			stmt.setTime(4, r.getHora());
 			stmt.setInt(5, r.getCantHoras());
 			stmt.setInt(6, r.getPer().getId());
+			stmt.setString(7, r.getEstado());
 			stmt.executeUpdate();
 						
 		}catch (Exception ex){
@@ -48,22 +49,23 @@ public class DataReserva {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Reserva r=null;
-		ArrayList<Reserva> revs= new ArrayList<Reserva>();
+		ArrayList<Reserva> res= new ArrayList<Reserva>();
 		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select * from reserva r inner join elemento e on r.idElemento = e.idE where idPersona=? ");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select * from reserva where idPersona=?");
 			stmt.setInt(1, idPers);
 			rs=stmt.executeQuery();
 			if(rs!=null){
-				while(rs.next()){
-					
+				while(rs.next()){					
 					r=new Reserva();
 					r.setId(rs.getInt("idR"));
 					r.setFecha(rs.getDate("fecha"));
 					r.setDetalle(rs.getString("detalle"));
 					r.setCantHoras(rs.getInt("cantHoras"));
-//					r.getElem().setNombre(rs.getString("nombre"));
-//					r.getElem().setDescrip(rs.getString("descrip"));
-					revs.add(r);
+					r.setEstado(rs.getString("estado"));
+					r.setHora(rs.getTime("hora"));
+					r.getElem().setId(rs.getInt("idElemento"));
+					res.add(r);
 				}
 			}
 		} catch (Exception e) {
@@ -78,8 +80,8 @@ public class DataReserva {
 			}
 		}
 		
-		System.out.println("DATA  "+revs.get(0).getDetalle());
-		return revs;
+		System.out.println("DATA  "+res.get(0).getDetalle());
+		return res;
 	}
 
 	public void delete(Reserva r) {
