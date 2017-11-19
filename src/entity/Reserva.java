@@ -11,7 +11,7 @@ public class Reserva {
 	private Elemento elem;
 	private Persona per;
 	private int cantHoras;
-	private String estado = "Pendiente";
+	private String estado;
 	
 	public Reserva(){};
 	
@@ -39,7 +39,7 @@ public class Reserva {
 		return cantHoras;
 	}
 	public void setCantHoras(int cantHoras) {
-		cantHoras = cantHoras;
+		this.cantHoras = cantHoras;
 	}
 	public Date getFecha() {
 		return fecha;
@@ -59,7 +59,6 @@ public class Reserva {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 	public String getDetalle() {
 		return detalle;
 	}

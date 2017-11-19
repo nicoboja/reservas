@@ -10,6 +10,7 @@ import entity.Reserva;
 import entity.TipoElemento;
 
 public class CtrlABMReserva {
+	
 	private DataReserva dataRes=new DataReserva();
 	private DataTipoElemento dataTipo=new DataTipoElemento();
 	private DataElemento dataElem=new DataElemento();
@@ -18,7 +19,6 @@ public class CtrlABMReserva {
 		dataRes.add(r);
 	}
 	
-
 	public Reserva getById(Reserva r) throws Exception{
 		return this.dataRes.getById(r);		
 	}
@@ -34,12 +34,16 @@ public class CtrlABMReserva {
 	public ArrayList<TipoElemento> getTipos() throws Exception{
 		return dataTipo.getAll();
 	}
+	
 	public void update(Reserva r)throws Exception{
 		dataRes.update(r);
 	}
 
 	public ArrayList<Elemento> getElementos() throws Exception{
 		return dataElem.getAll();
+	}
+	public void cancelRes(Reserva r) throws Exception {
+		dataRes.cancelRes(r);
 	}
 
 }

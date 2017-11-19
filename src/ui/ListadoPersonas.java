@@ -60,7 +60,7 @@ public class ListadoPersonas extends JInternalFrame {
 		btnActualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				initDataBindings();
+				actualizaTable();
 			}
 		});
 		btnActualizar.addActionListener(new ActionListener() {
@@ -131,5 +131,15 @@ public class ListadoPersonas extends JInternalFrame {
 		//
 		jTableBinding.setEditable(false);
 		jTableBinding.bind();
+	}
+	
+	protected void actualizaTable() {
+		try{
+			this.pers=ctrl.getAll();
+			this.initDataBindings();
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 }

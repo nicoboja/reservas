@@ -2,11 +2,9 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 
 import javax.swing.JOptionPane;
 import javax.swing.JInternalFrame;
-
 
 import controlers.CtrlABMReserva;
 import entity.Reserva;
@@ -19,6 +17,10 @@ import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ListadoReservas extends JInternalFrame {
 	
@@ -46,8 +48,20 @@ public class ListadoReservas extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(576, 324, 117, 29);
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				btnCancelResv();
+			}
+		});
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancelar.setBounds(10, 310, 117, 29);
 		getContentPane().add(btnCancelar);
+		
 		System.out.println("ID: "+idPersona);
 		try{
 			
@@ -78,7 +92,33 @@ public class ListadoReservas extends JInternalFrame {
 		BeanProperty<Reserva, Integer> reservaBeanProperty5 = BeanProperty.create("cantHoras");
 		jTableBinding.addColumnBinding(reservaBeanProperty5).setColumnName("Cantidad Hs.").setEditable(false);
 		//
+		//
+		BeanProperty<Reserva, Integer> reservaBeanProperty6 = BeanProperty.create("estado");
+		jTableBinding.addColumnBinding(reservaBeanProperty6).setColumnName("Estado").setEditable(false);
+		//
 		jTableBinding.setEditable(false);
 		jTableBinding.bind();
 	}
+	protected void btnCancelResv() {
+		int indexResv=table.convertRowIndexToModel(table.getSelectedRow());
+	//	System.out.println(indexResv);
+		try {
+			ctrl.cancelRes(this.res.get(indexResv));
+			this.actualizar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	protected void actualizar(){
+		//this.hide();
+		try{
+			this.res=ctrl.getById(idPersona);
+			this.initDataBindings();
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(this,e.getMessage(),"Error .--",JOptionPane.ERROR_MESSAGE);
+	
+		}
+		
+	};
 }
