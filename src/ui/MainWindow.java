@@ -191,10 +191,9 @@ public class MainWindow {
 	}
 
 	protected void mnuGestionarReservasClicked() {
-		ABMCReservaDesktop pd= new ABMCReservaDesktop();
+		ABMCReservaDesktop pd= new ABMCReservaDesktop((idPersona));
 		desktopPane.add(pd);
-		pd.setVisible(true);
-		
+		pd.setVisible(true);		
 	}
 	
 	protected void mnuABMCPersonaClick() {

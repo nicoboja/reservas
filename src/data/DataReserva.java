@@ -39,12 +39,12 @@ public class DataReserva {
 		}			
 	}
 
-
 	public Reserva getById(Reserva r) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public ArrayList<Reserva> getById(int idPers) throws Exception {
+	
+	public ArrayList<Reserva> getByIdPer(int idPers) throws Exception {
 		System.out.println("dataReserva!");
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -52,7 +52,7 @@ public class DataReserva {
 		ArrayList<Reserva> res= new ArrayList<Reserva>();
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from reserva where idPersona=?");
+					"select * from reserva where idPersona=? and estado='Pendiente' and fecha>CURDATE()");			
 			stmt.setInt(1, idPers);
 			rs=stmt.executeQuery();
 			if(rs!=null){
@@ -79,7 +79,7 @@ public class DataReserva {
 				throw e;
 			}
 		}
-		
+		System.out.println("enviando array");
 		System.out.println("DATA  "+res.get(0).getDetalle());
 		return res;
 	}

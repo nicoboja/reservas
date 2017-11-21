@@ -10,9 +10,12 @@ import controlers.CtrlABMReserva;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
+
 import entity.Elemento;
+import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -39,21 +42,28 @@ public class ABMCReservaDesktop extends JInternalFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public void run(int idPersona) {
 				try {
-					ABMCReservaDesktop frame = new ABMCReservaDesktop();
+					ABMCReservaDesktop frame = new ABMCReservaDesktop(idPersona);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}
 
 	/**
 	 * Create the frame.
+	 * @param idPersona 
 	 */
-	public ABMCReservaDesktop() {
+	public ABMCReservaDesktop(int idPersona) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -100,7 +110,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				aceptarClick();
+				aceptarClick(idPersona);
 			}
 		});
 		btnAceptar.setBounds(72, 236, 98, 23);
@@ -158,8 +168,9 @@ public class ABMCReservaDesktop extends JInternalFrame {
 	}
 	
 	private void cargarListaElementos() {
-		try {			
+		try {
 			this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getElementos().toArray()));
+			//this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getByTipo((TipoElemento)this.cboTipo.getSelectedItem()).toArray()));
 			this.cboElemento.setSelectedIndex(-1);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
@@ -180,8 +191,8 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		
 	}
 	
-	private void aceptarClick(){
-		Reserva r = this.mapearDeForm();
+	private void aceptarClick(int idPersona){
+		Reserva r = this.mapearDeForm(idPersona);
 		try{
 			ctrl.add(r);
 		} catch (Exception ex) {
@@ -189,7 +200,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		}		
 	}
 	
-	private Reserva mapearDeForm(){
+	private Reserva mapearDeForm(int idPersona){
 		Reserva r=new Reserva();
 		
 		if (cboElemento.getSelectedIndex() != -1){
@@ -200,6 +211,10 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		r.setHora(Time.valueOf(this.txtHora.getText()));
 		r.setCantHoras(Integer.parseInt(this.txtCantHoras.getText()));	
 		r.setDetalle(this.txtDetalle.getText());
+		r.setPer(new Persona());
+		r.setEstado("Habilitado");
+		r.getPer().setId(idPersona);
+		
 		return r;
 		
 	}		

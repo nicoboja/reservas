@@ -94,8 +94,7 @@ public class DataElemento {
 					elementos.add(elem);
 				}
 			}
-		} catch (SQLException e) {
-			
+		} catch (SQLException e) {			
 			throw e;
 		} 
 
@@ -127,9 +126,37 @@ public class DataElemento {
 			FactoryConexion.getInstancia().releaseConn();
 		}		
 	}
+	
+	public ArrayList<Elemento> getByTipo(TipoElemento te) throws Exception{
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		ArrayList<Elemento> elementos= new ArrayList<Elemento>();
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select * from elemento where idT=?");
+			stmt.setInt(3, te.getIdT());
+			rs=stmt.executeQuery();
+			if(rs!=null){
+				while(rs.next()){
+					Elemento elem=new Elemento();
+					elem.setId(rs.getInt("idE"));
+					elem.setNombre(rs.getString("nombre"));
+					elementos.add(elem);
+				}
+			}
+		} catch (SQLException e) {			
+			throw e;
+		} 
 
-	public TipoElemento getTipo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}		
+		return elementos;		
+	}	
+
 }

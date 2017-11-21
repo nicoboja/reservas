@@ -39,14 +39,11 @@ public class CtrlABMPersona {
 		*/
 		if(pdata.equalsUss(p)){
 			rta = pdata.getId();
-			System.out.println("VERDADERO");
-			
-		
+			System.out.println("VERDADERO");		
 		}
 		
 		return rta;
-		
-		
+				
 	}
 
 	

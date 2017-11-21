@@ -129,7 +129,7 @@ public class DataPersona {
 		}
 		return p;
 	}
-	
+		
 	public void remove(Persona p) throws Exception {
 		PreparedStatement stmt=null;
 		try{

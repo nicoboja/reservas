@@ -45,7 +45,7 @@ public class ListadoReservas extends JInternalFrame {
 		System.out.println("ID: "+idPersona);
 		try{
 			
-			this.res=ctrl.getById(idPersona);
+			this.res=ctrl.getByIdPer(idPersona);
 			/*System.out.println("ID: "+idPersona);
 			System.out.println(this.res.get(0).getDetalle());*/
 		} catch (Exception e){
