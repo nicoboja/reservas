@@ -13,34 +13,70 @@ public class CtrlABMReserva {
 	private DataReserva dataRes=new DataReserva();
 	private DataTipoElemento dataTipo=new DataTipoElemento();
 	private DataElemento dataElem=new DataElemento();
-
 	
 	public void add(Reserva r) throws Exception{
-		ArrayList<Reserva> res=new ArrayList <Reserva>();
+		if(ValidaResPersona(r)==true){
+			System.out.println("Validado 1");
+			if(ValidaResFecha(r)==true){
+				dataRes.add(r);
+			}else {
+				System.out.println("No hay disponibilidad en esa fecha/hora");
+			}
+		}else {
+			System.out.println("Supero el numero de reservas pendientes maximo para ese tipo de elemento");
+		}
+	}			
+
+	public boolean ValidaResPersona(Reserva r)throws Exception{
+		ArrayList<Reserva> resPer=new ArrayList <Reserva>();
+		resPer=getByIdPer(r.getPer().getId());	
 		int cant=0;
-		res=getByIdPer(r.getPer().getId());		
-		if (res.isEmpty()){
-			if(r.getElem().getTipoElem().getTiempoMax()<=r.getCantHoras()){
-			dataRes.add(r);
-			}			
-		}else{		
-			for (int i=0; i < res.size(); i++){
-				if(res.get(i).getElem().getTipoElem().getIdT()==r.getElem().getTipoElem().getIdT()){
+		boolean v;
+		if(resPer.isEmpty()){
+			v= true;
+		}else {
+			for (int i=0; i < resPer.size(); i++){
+				if(resPer.get(i).getElem().getTipoElem().getIdT()==r.getElem().getTipoElem().getIdT()){
 					cant=cant++;
 				}			
 			}
-			if(cant<r.getElem().getTipoElem().getCantMax() &&
-					r.getElem().getTipoElem().getTiempoMax()<=r.getCantHoras()){
-				dataRes.add(r);			
-			}	
-		}	
-	}	
-
+			if(cant<r.getElem().getTipoElem().getCantMax()){
+				v= true;
+			}else{
+				v= false;
+			}
+		}		
+		return v;
+	}
+	public boolean ValidaResFecha(Reserva r)throws Exception{		
+		ArrayList<Reserva> resFec=new ArrayList <Reserva>();
+		resFec=getByFecha(r.getFecha());
+		int n=0;
+		boolean v=false;
+		if (resFec.isEmpty()){
+			v=true;
+		}else if (r.getHora().getHours()+r.getCantHoras()<=resFec.get(0).getHora().getHours()){
+			v= true; 
+		}else {
+			do {
+				if (resFec.get(n).getHora().getHours()<=r.getHora().getHours()+r.getCantHoras()&&
+						r.getHora().getHours()+r.getCantHoras()<=resFec.get(n+1).getHora().getHours()){
+					v=true;
+					n=resFec.size();
+				}			    
+			     n++;
+			} while (n<resFec.size());				
+		}
+		return v;
+	}
 	public Reserva getById(Reserva r) throws Exception{
 		return this.dataRes.getById(r);		
 	}	
 	public ArrayList<Reserva> getByIdPer(int idP) throws Exception{
 		return dataRes.getByIdPer(idP);		
+	}	
+	public ArrayList<Reserva> getByFecha(java.sql.Date fec) throws Exception{
+		return dataRes.getByFecha(fec);		
 	}	
 	public void delete(Reserva r) throws Exception{
 		dataRes.delete(r);
@@ -51,8 +87,8 @@ public class CtrlABMReserva {
 	public void update(Reserva r)throws Exception{
 		dataRes.update(r);
 	}
-	public ArrayList<Elemento> getByTipo(TipoElemento tipo) throws Exception{
-		return dataElem.getByTipo(tipo);
+	public ArrayList<Elemento> getByTipo(int t) throws Exception{
+		return dataElem.getByTipo(t);
 	}
 	public ArrayList<Elemento> getElementos() throws Exception{
 		return dataElem.getAll();

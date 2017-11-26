@@ -40,7 +40,7 @@ public class Elemento {
 	
 	@Override
 	public String toString() {
-		return String.valueOf(id) + nombre;
+		return String.valueOf(id) +" - "+ nombre;
 	}	
 	
 }

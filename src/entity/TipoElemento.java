@@ -50,7 +50,7 @@ public class TipoElemento {
 	}
 	@Override
 	public String toString() {
-		return String.valueOf(idT) + descripcion;
+		return String.valueOf(idT) +" - "+ descripcion;
 	}
 
 }

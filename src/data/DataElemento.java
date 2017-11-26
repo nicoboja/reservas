@@ -127,14 +127,14 @@ public class DataElemento {
 		}		
 	}
 	
-	public ArrayList<Elemento> getByTipo(TipoElemento te) throws Exception{
+	public ArrayList<Elemento> getByTipo(int t) throws Exception{
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		ArrayList<Elemento> elementos= new ArrayList<Elemento>();
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select * from elemento where idT=?");
-			stmt.setInt(3, te.getIdT());
+			stmt.setInt(1, t);
 			rs=stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){

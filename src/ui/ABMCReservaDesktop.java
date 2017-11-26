@@ -64,6 +64,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 	 * @param idPersona 
 	 */
 	public ABMCReservaDesktop(int idPersona) {
+		setTitle("Nueva Reserva");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		
@@ -167,10 +168,10 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		}
 	}
 	
-	private void cargarListaElementos() {
+	private void cargarListaElementos(int t) {
 		try {
-			this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getElementos().toArray()));
-			//this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getByTipo((TipoElemento)this.cboTipo.getSelectedItem()).toArray()));
+			//this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getElementos().toArray()));
+			this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getByTipo(t).toArray()));
 			this.cboElemento.setSelectedIndex(-1);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, e.getMessage());
@@ -179,7 +180,9 @@ public class ABMCReservaDesktop extends JInternalFrame {
 	
 
 	private void okTipoClick() {
-		cargarListaElementos();
+		TipoElemento tipoe;
+		tipoe=((TipoElemento)this.cboTipo.getSelectedItem());		
+		cargarListaElementos(tipoe.getIdT());
 		cboElemento.setEnabled(true);
 		txtFecha.setEnabled(true);
 		txtHora.setEnabled(true);
@@ -212,7 +215,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		r.setCantHoras(Integer.parseInt(this.txtCantHoras.getText()));	
 		r.setDetalle(this.txtDetalle.getText());
 		r.setPer(new Persona());
-		r.setEstado("Habilitado");
+		r.setEstado("Pendiente");
 		r.getPer().setId(idPersona);
 		
 		return r;

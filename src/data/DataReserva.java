@@ -52,7 +52,8 @@ public class DataReserva {
 		ArrayList<Reserva> res= new ArrayList<Reserva>();
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select * from reserva where idPersona=? and estado='Pendiente' and fecha>CURDATE()");			
+					"select * from reserva r inner join elemento e on r.idElemento=e.idE "
+					+ "where e.idE=? and r.estado='Habilitado' and r.fecha>CURDATE() order by r.fecha");			
 			stmt.setInt(1, idPers);
 			rs=stmt.executeQuery();
 			if(rs!=null){
@@ -79,11 +80,50 @@ public class DataReserva {
 				throw e;
 			}
 		}
-		System.out.println("enviando array");
-		System.out.println("DATA  "+res.get(0).getDetalle());
+		System.out.println("enviando array por persona");
 		return res;
 	}
 
+	public ArrayList<Reserva> getByFecha(java.sql.Date fec) throws Exception {
+		System.out.println("dataReserva!");
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Reserva r=null;
+		ArrayList<Reserva> res= new ArrayList<Reserva>();
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select * from reserva where fecha=? and estado='Habilitado'");			
+			stmt.setDate(1, fec);
+			rs=stmt.executeQuery();
+			if(rs!=null){
+				while(rs.next()){					
+					r=new Reserva();
+					r.setId(rs.getInt("idR"));
+					r.setFecha(rs.getDate("fecha"));
+					r.setDetalle(rs.getString("detalle"));
+					r.setCantHoras(rs.getInt("cantHoras"));
+					r.setEstado(rs.getString("estado"));
+					r.setHora(rs.getTime("hora"));
+					//r.getPer().setId(rs.getInt("idPersona"));
+					//r.getElem().setId(rs.getInt("idElemento"));
+					res.add(r);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		System.out.println("enviando array getByFecha");
+		return res;
+	}
+	
 	public void delete(Reserva r) {
 		// TODO Auto-generated method stub
 		

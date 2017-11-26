@@ -3,6 +3,7 @@ package entity;
 public class Categoria {
 	private int id;
 	private String descripcion;
+	
 	public int getId() {
 		return id;
 	}
