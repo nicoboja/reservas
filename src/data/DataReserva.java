@@ -17,8 +17,7 @@ public class DataReserva {
 	public void add(Reserva r) throws Exception {
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
-		try{
-			
+		try{			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"insert into reserva (fecha, detalle, idElemento, hora, cantHoras, idPersona, estado) values (?,?,?,?,?,?,?)");
 			stmt.setDate(1, r.getFecha());
@@ -28,14 +27,12 @@ public class DataReserva {
 			stmt.setInt(5, r.getCantHoras());
 			stmt.setInt(6, r.getPer().getId());
 			stmt.setString(7, r.getEstado());
-			stmt.executeUpdate();
-						
-		}catch (Exception ex){
+			stmt.executeUpdate();						
+		}catch (Exception e){
 			System.out.println("No se ha cargado un elemento");
-			throw ex;
+			throw e;
 		}finally{
-			FactoryConexion.getInstancia().releaseConn();
-			
+			FactoryConexion.getInstancia().releaseConn();			
 		}			
 	}
 

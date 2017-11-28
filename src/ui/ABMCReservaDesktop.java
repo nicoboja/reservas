@@ -164,13 +164,12 @@ public class ABMCReservaDesktop extends JInternalFrame {
 			this.cboTipo.setModel(new DefaultComboBoxModel(ctrl.getTipos().toArray()));
 			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 	
 	private void cargarListaElementos(int t) {
 		try {
-			//this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getElementos().toArray()));
 			this.cboElemento.setModel(new DefaultComboBoxModel(ctrl.getByTipo(t).toArray()));
 			this.cboElemento.setSelectedIndex(-1);
 		} catch (Exception e) {
@@ -190,8 +189,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		txtDetalle.setEnabled(true);
 		btnAceptar.setEnabled(true);	
 		cboTipo.setEnabled(false);
-		btnOk.setEnabled(false);
-		
+		btnOk.setEnabled(false);		
 	}
 	
 	private void aceptarClick(int idPersona){
@@ -199,7 +197,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		try{
 			ctrl.add(r);
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + ex.getMessage());
 		}		
 	}
 	
@@ -208,8 +206,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		
 		if (cboElemento.getSelectedIndex() != -1){
 			r.setElem((Elemento)this.cboElemento.getSelectedItem());
-		}
-		
+		}		
 		r.setFecha(Date.valueOf(this.txtFecha.getText()));
 		r.setHora(Time.valueOf(this.txtHora.getText()));
 		r.setCantHoras(Integer.parseInt(this.txtCantHoras.getText()));	
@@ -218,7 +215,6 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		r.setEstado("Pendiente");
 		r.getPer().setId(idPersona);
 		
-		return r;
-		
+		return r;		
 	}		
 }

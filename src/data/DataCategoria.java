@@ -26,18 +26,16 @@ public class DataCategoria {
 					cats.add(c);
 				}
 			}
-		} catch (Exception e){
+		} catch (SQLException e){
 			throw e;
-		}
-		
+		}		
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+			throw e;
+		}		
 		return cats;
 	}
 }

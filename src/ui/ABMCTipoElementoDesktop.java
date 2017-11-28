@@ -43,7 +43,7 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 					ABMCTipoElementoDesktop frame = new ABMCTipoElementoDesktop();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 		});
@@ -152,7 +152,7 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 		try {
 			this.mapearAForm(ctrl.getByNombre(this.mapearDeForm()));
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 	
@@ -163,7 +163,7 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Se cargo el tipo elemento: "+ te.getDescripcion());
 			limpiarForm();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + ex.getMessage());
 		}
 		this.txtId.setText(String.valueOf(te.getIdT()));		
 	}
@@ -173,8 +173,8 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 			ctrl.delete(this.mapearDeForm());
 			JOptionPane.showMessageDialog(this, "Se borro el tipo elemento "+ txtDescripcion.getText()+". ID: "+txtId.getText());
 			limpiarForm();
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 	
@@ -183,13 +183,12 @@ public class ABMCTipoElementoDesktop extends JInternalFrame {
 			ctrl.update(this.mapearDeForm());
 			JOptionPane.showMessageDialog(this, "Se modifico el tipo elemento ID: "+ txtId.getText());
 			limpiarForm();
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 	
-	private void mapearAForm(TipoElemento te){
-		
+	private void mapearAForm(TipoElemento te){		
 		this.txtId.setText(String.valueOf(te.getIdT()));
 		this.txtDescripcion.setText(te.getDescripcion());
 		this.txtDias.setText(String.valueOf(te.getDiasMaxAnt()));

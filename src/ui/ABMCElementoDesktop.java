@@ -52,12 +52,11 @@ public class ABMCElementoDesktop extends JInternalFrame {
 					ABMCElementoDesktop frame = new ABMCElementoDesktop();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -150,7 +149,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 			this.cboTipo.setModel(new DefaultComboBoxModel(ctrl.getTipos().toArray()));
 			this.cboTipo.setSelectedIndex(-1);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 
@@ -158,7 +157,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		try {
 			this.mapearAForm(ctrl.getByNombre(this.mapearDeForm()));
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  e.getMessage());
 		}
 		
 	}
@@ -170,7 +169,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, " Se cargo el elemento: "+ e.getNombre());
 			this.limpiarForm();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(this, ex.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  ex.getMessage());
 		}
 		this.txtId.setText(String.valueOf(e.getId()));		
 	}
@@ -178,20 +177,20 @@ public class ABMCElementoDesktop extends JInternalFrame {
 	protected void borrarClick(){
 		try{
 			ctrl.delete(this.mapearDeForm());
-			JOptionPane.showMessageDialog(this, " Se borro el elemento");
+			JOptionPane.showMessageDialog(this, "Se borro el elemento");
 			this.limpiarForm();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  e.getMessage());
 		}
 	}
 	
 	protected void modificarClick(){
 		try{
 			ctrl.update(this.mapearDeForm());
-			JOptionPane.showMessageDialog(this, " Se modifico el elemento");
+			JOptionPane.showMessageDialog(this, "Se modifico el elemento");
 			this.limpiarForm();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 	
@@ -208,9 +207,7 @@ public class ABMCElementoDesktop extends JInternalFrame {
 		if(!this.txtId.getText().isEmpty()){
 			e.setId(Integer.parseInt(this.txtId.getText()));
 		}		
-		e.setNombre(this.txtElemento.getText());
-
-		
+		e.setNombre(this.txtElemento.getText());		
 		if (cboTipo.getSelectedIndex() != -1){
 			e.setTipoElem((TipoElemento)this.cboTipo.getSelectedItem());
 		}

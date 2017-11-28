@@ -27,15 +27,15 @@ public class DataTipoElemento {
 					tipoElem.setDiasMaxAnt(rs.getInt("diasant"));
 					tipoElem.setTiempoMax(rs.getInt("tiempoMax"));
 			}			
-		} catch (Exception e1) {
-			throw e1;
+		} catch (SQLException e) {
+			throw e;
 		} finally{
 			try {
 				if(rs!=null)rs.close();
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
-			} catch (SQLException e1) {
-				throw e1;
+			} catch (SQLException e) {
+				throw e;
 			}
 		}
 		return tipoElem;
@@ -43,8 +43,7 @@ public class DataTipoElemento {
 	
 	public void add(TipoElemento te) throws Exception {
 		PreparedStatement stmt=null;
-		try{
-			
+		try{			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
 					"insert into tipoelemento (descripcion, maxPend, diasant, tiempoMax) values (?,?,?,?)");
 			stmt.setString(1, te.getDescripcion());
@@ -52,9 +51,9 @@ public class DataTipoElemento {
 			stmt.setInt(3, te.getDiasMaxAnt());
 			stmt.setInt(4, te.getTiempoMax());
 			stmt.executeUpdate();
-		}catch (Exception ex){
+		}catch (Exception e){
 			System.out.println("No se ha cargado el tipo elemento");
-			throw ex;
+			throw e;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}			
@@ -71,9 +70,9 @@ public class DataTipoElemento {
 			stmt.setInt(4, te.getTiempoMax());
 			stmt.setInt(5, te.getIdT());
 			stmt.executeUpdate();					
-		}catch (Exception ex) {
+		}catch (Exception e) {
 			System.out.println("Ha fallado la modificacion de datos");
-			throw ex;
+			throw e;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}		
@@ -86,9 +85,9 @@ public class DataTipoElemento {
 					"delete from tipoelemento where idT=?");
 			stmt.setInt(1, te.getIdT());
 			stmt.executeUpdate();			
-		}catch (Exception ex) {
+		}catch (Exception e) {
 			System.out.println("Ha fallado el borrado de datos");
-			throw ex;
+			throw e;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}		
@@ -121,7 +120,7 @@ public class DataTipoElemento {
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
 		} catch (SQLException e) {			
-			e.printStackTrace();
+			throw e;
 		}		
 		return tipoelementos;		
 	}	

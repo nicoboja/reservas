@@ -14,8 +14,7 @@ public class DataPersona {
 	
 
 	
-	public ArrayList<Persona> getAll() throws Exception{
-	
+	public ArrayList<Persona> getAll() throws Exception{	
 		Statement stmt=null;
 		ResultSet rs=null;
 		ArrayList<Persona> pers= new ArrayList<Persona>();
@@ -37,25 +36,19 @@ public class DataPersona {
 					pers.add(p);
 				}
 			}
-		} catch (SQLException e) {
-			
+		} catch (SQLException e) {			
 			throw e;
 		} catch (AppDataException ade){
 			throw ade;
 		}
-		
-
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		return pers;
-		
+		} catch (SQLException e) {			
+			throw e;
+		}		
+		return pers;		
 	}
 	
 	public Persona getByDni(Persona per) throws Exception{
@@ -77,8 +70,7 @@ public class DataPersona {
 					p.setHabilitado(rs.getBoolean("habilitado"));
 					p.getCategoria().setId(rs.getInt("idC"));
 					p.getCategoria().setDescripcion(rs.getString("nivel"));
-			}
-			
+			}			
 		} catch (Exception e) {
 			throw e;
 		} finally{
@@ -114,8 +106,7 @@ public class DataPersona {
 					p.getCategoria().setDescripcion(rs.getString("nivel"));
 					p.setPass(rs.getString("contra"));
 					p.setUss(rs.getString("usuario"));
-			}
-			
+			}			
 		} catch (Exception e) {
 			throw e;
 		} finally{
@@ -138,9 +129,8 @@ public class DataPersona {
 			stmt.setInt(1, p.getId());
 			stmt.executeUpdate();		
 			System.out.println("Se borro la Persona con ID= "+p.getId()+" Nombre: "+p.getNombre());
-		}catch (Exception e1) {
-			System.out.println("Ha fallado el borrado de datos");
-			throw e1;
+		}catch (Exception e) {
+			throw e;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}		
@@ -157,11 +147,11 @@ public class DataPersona {
 			stmt.setBoolean(4, p.isHabilitado());
 			stmt.setInt(5, p.getCategoria().getId());
 			stmt.setInt(6, p.getId());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			System.out.println("Se Modifico la Persona con ID= "+p.getId()+" Nombre: "+p.getNombre());
-		}catch (Exception e1) {
+		}catch (Exception e) {
 			System.out.println("Ha fallado el borrado de datos");
-			throw e1;
+			throw e;
 		}finally{
 			FactoryConexion.getInstancia().releaseConn();
 		}		
@@ -182,7 +172,6 @@ public class DataPersona {
 			stmt.setBoolean(4, p.isHabilitado());
 			stmt.setInt(5, p.getCategoria().getId());
 			stmt.executeUpdate();
-			//??
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				p.setId(keyResultSet.getInt(1));

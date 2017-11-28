@@ -48,8 +48,7 @@ public class MainWindow {
 			public void run() {
 				try {
 					MainWindow window = new MainWindow();
-					window.frame.setVisible(true);
-				
+					window.frame.setVisible(true);				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -237,7 +236,7 @@ public class MainWindow {
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			JOptionPane.showInternalMessageDialog(desktopPane, this, "Error en Usuario o Contraseña ", idPersona);
+			JOptionPane.showInternalMessageDialog(desktopPane, this, "Error de Usuario o Pass ", idPersona);
 		}
 		 
 	}

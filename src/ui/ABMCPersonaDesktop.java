@@ -219,16 +219,15 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 			this.cboCategoria.setModel(new DefaultComboBoxModel(ctrl.getCategorias().toArray()));
 			this.cboCategoria.setSelectedIndex(-1);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 	}
 
 	protected void buscarClick() {
 		try {
-			//??
 			this.mapearAForm(ctrl.getByDni(this.mapearDeForm()));
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " + e.getMessage());
 		}
 		
 	}
@@ -239,12 +238,9 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 			ctrl.add(p);
 			JOptionPane.showMessageDialog(null, "Se agrego a "+p.getNombre()+" correctamente!");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  e.getMessage());
 		}
-		this.txtId.setText(String.valueOf(p.getId()));
-		
-
-		
+		this.txtId.setText(String.valueOf(p.getId()));		
 	}
 	
 	protected void borrarClick(){
@@ -252,16 +248,16 @@ public class ABMCPersonaDesktop extends JInternalFrame {
 			ctrl.delete(this.mapearDeForm());
 			JOptionPane.showMessageDialog(null, "Se Elimino Correctamente!");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  e.getMessage());
 		}
 	}
 	
 	protected void modificarClick(){
 		try{
 			ctrl.update(this.mapearDeForm());
-			JOptionPane.showMessageDialog(null, "Se Modifico la Persona Correctamente!");
+			JOptionPane.showMessageDialog(null, "Se Modifico Correctamente!");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			JOptionPane.showMessageDialog(this, "Error de base de datos: " +  e.getMessage());
 		}
 	}
 	
