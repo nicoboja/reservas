@@ -13,6 +13,7 @@ public class CtrlABMElemento {
 	private DataElemento dataElem=new DataElemento();
 	private DataTipoElemento dataTipo=new DataTipoElemento();
 	
+	
 	public void add(Elemento e) throws Exception{
 		dataElem.add(e);
 	}
