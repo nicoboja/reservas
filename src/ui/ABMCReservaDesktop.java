@@ -96,7 +96,7 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		
 		txtHora = new JTextField();
 		txtHora.setEnabled(false);
-		txtHora.setBounds(300, 103, 53, 20);
+		txtHora.setBounds(300, 103, 73, 20);
 		getContentPane().add(txtHora);
 		txtHora.setColumns(10);
 		
@@ -155,6 +155,14 @@ public class ABMCReservaDesktop extends JInternalFrame {
 		});
 		btnCancelar.setBounds(248, 236, 89, 23);
 		getContentPane().add(btnCancelar);
+		
+		JLabel lblEjFec = new JLabel("(AAAA-MM-DD)");
+		lblEjFec.setBounds(142, 127, 89, 9);
+		getContentPane().add(lblEjFec);
+		
+		JLabel lblhhmmss = new JLabel("(HH:mm:ss)");
+		lblhhmmss.setBounds(300, 127, 73, 11);
+		getContentPane().add(lblhhmmss);
 		
 		cargarListaTipos();
 	}
